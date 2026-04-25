@@ -1,0 +1,128 @@
+<html>
+<head>
+    <title>Task_2</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: white;
+            padding: 20px;
+        }
+
+        input {
+            padding: 8px;
+            width: 260px;
+        }
+
+        button {
+            padding: 8px 12px;
+            cursor: pointer;
+            background: white;
+        }
+
+       
+        .container {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .box {
+            width: 300px;
+            border: 2px solid black;
+            padding: 15px;
+            background: white;
+        }
+
+        .title {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 1px solid black;
+            padding-bottom: 5px;
+        }
+
+        img {
+            width: 100%;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Country Information</h2>
+
+<input type="text" id="countryName" placeholder="Enter country name">
+<button onclick="getCountry()">Search</button>
+
+
+<div class="container">
+    <div id="countryBox" class="box"></div>
+    <div id="neighborBox" class="box"></div>
+</div>
+
+<script>
+function getCountry() {
+    const country = document.getElementById("countryName").value;
+    const countryBox = document.getElementById("countryBox");
+    const neighborBox = document.getElementById("neighborBox");
+
+    if (!country) {
+        countryBox.innerHTML = "Please enter a country name";
+        neighborBox.innerHTML = "";
+        return;
+    }
+
+ 
+    countryBox.innerHTML = "";
+    neighborBox.innerHTML = "";
+
+
+    fetch(`https://restcountries.com/v2/name/${country}`)
+        .then(res => res.json())
+        .then(data => {
+            const c = data[0];
+
+         
+            countryBox.innerHTML = `
+                <div class="title">Country</div>
+                <img src="${c.flag}" alt="flag">
+                    <p style="font-weight: bold; font-size: 20px;"><b></b> ${c.name}</p>
+                    <p style="text-transform: uppercase; color: gray; margin-top: -10px; font-size: 13px;"><b></b> ${c.region}</p>
+                    <p><b>&#128107; &nbsp;</b> ${c.population.toLocaleString()}</p>
+                    <p><b>&#128483; &nbsp;&nbsp;</b> ${c.languages.map(lang => lang.name).join(", ")}</p>      
+                    <p><b>&#128176; &nbsp;&nbsp;</b> ${c.currencies[0].name}</p>
+                `;
+
+        
+            if (!c.borders || c.borders.length === 0) {
+                neighborBox.innerHTML = "No neighbor country found";
+                return;
+            }
+
+          
+            const neighbor = c.borders[0];
+            return fetch(`https://restcountries.com/v2/alpha/${neighbor}`)
+                .then(res => res.json())
+                .then(n => {
+                    neighborBox.innerHTML = `
+                        <div class="title">Neighbor Country</div>
+                        <img src="${n.flag}" alt="flag">
+                        <p style="font-weight: bold; font-size: 20px;"><b></b> ${n.name}</p>
+                        <p style="text-transform: uppercase; color: gray; margin-top: -10px; font-size: 13px;"><b></b> ${n.region}</p>
+                        <p><b>&#128107; &nbsp;</b> ${n.population.toLocaleString()}</p>
+                        <p><b>&#128483; &nbsp;&nbsp;</b> ${n.languages.map(lang => lang.name).join(", ")}</p>
+                        <p><b>&#128176; &nbsp;&nbsp;</b> ${n.currencies[0].name}</p>
+                    `;
+                });
+        })
+        .catch(() => {
+            countryBox.innerHTML = "Country not found";
+            neighborBox.innerHTML = "";
+        });
+}
+</script>
+
+</body>
+</html>

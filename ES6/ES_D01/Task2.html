@@ -1,0 +1,121 @@
+<html>
+<html>
+<head>
+    <title>Task_2</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .form-row label {
+            width: 180px; 
+            font-weight: bold;
+         
+        }
+
+        .form-row input,
+        .form-row select {
+            flex: 1; 
+            padding: 8px;
+            font-weight: bold;
+            text-align: center;
+           
+        }
+
+        button {
+            padding: 8px 20px;
+            margin-top: 20px;
+            font-weight: bold;
+            width: 100%;
+            
+        }
+
+        .result {
+            background: white;
+            padding: 10px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h2 align="center">Calculator</h2>
+
+<div class="form-row">
+    <label>Select an operator:</label>
+    <select id="operator">
+        <option value="" disabled selected>Select an operator</option>
+        <option value="sum">+</option>
+        <option value="mul">×</option>
+        <option value="sub">-</option>
+        <option value="div">÷</option>
+    </select>
+</div>
+
+<div class="form-row">
+    <label>Enter numbers:</label>
+    <input type="text" id="numbers" placeholder="Example: 3,1,6,3">
+</div>
+
+<button onclick="runCalculation()">Run</button>
+
+<div id="error" class="error"></div>
+<div id="output"></div>
+
+<script>
+let runCalculation = () => {
+    let operator = document.getElementById("operator").value;
+    let input = document.getElementById("numbers").value.trim();
+    let errorDiv = document.getElementById("error");
+    let outputDiv = document.getElementById("output");
+    errorDiv.textContent = "";
+    outputDiv.innerHTML = "";
+
+    if (!operator) return errorDiv.textContent = "Please select an operator";
+
+    let numbers = input
+        .split(",")
+        .map(n => n.trim())
+        .filter(n => n !== "")
+        .map(n => Number(n));
+
+    if (numbers.length < 2) return errorDiv.textContent = "Error: Enter at least two numbers";
+    if (numbers.some(isNaN)) return errorDiv.textContent = "Error: Only numbers are allowed";
+
+    let result;
+    switch(operator) {
+        case "sum": result = numbers.reduce((a,b)=>a+b,0); break;
+        case "mul": result = numbers.reduce((a,b)=>a*b,1); break;
+        case "sub": result = numbers.reduce((a,b)=>a-b); break;
+        case "div": result = numbers.reduce((a,b)=>a/b); break;
+    }
+
+    outputDiv.innerHTML = `
+        <div class="result">
+            <span>result of ${operator} operation for ${numbers.join(",")}</span>
+            <span>${result}</span>
+        </div>
+    `;
+};
+</script>
+
+</body>
+</html>

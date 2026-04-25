@@ -1,0 +1,118 @@
+<html>
+<head>
+<title>Task_4</title>
+
+<style>
+body { font-family: Arial; padding: 20px; }
+
+form {
+    width: 400px;
+    border: 2px solid #000;
+    padding: 15px;
+}
+
+.row { margin-bottom: 10px; }
+label { width: 70px; display: inline-block; }
+input, select { padding: 5px; }
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-left: 75px;
+}
+</style>
+</head>
+
+<body>
+<h3>Form validation page</h3>
+
+<form id="form">
+    <div class="row">
+        <label>Name:</label>
+        <input id="name">
+        <div class="error" id="nameError"></div>
+    </div>
+
+    <div class="row">
+        <label>Country:</label>
+        <select id="country">
+            <option value="">Select</option>
+            <option value="Egypt">Egypt</option>
+            <option value="USA">USA</option>
+            <option value="KSA">KSA</option>
+        </select>
+    </div>
+
+    <div class="row">
+        <label>Zip:</label>
+        <input id="zip" readonly>
+    </div>
+
+    <div class="row">
+        <label>Email:</label>
+        <input id="email">
+        <div class="error" id="emailError"></div>
+    </div>
+
+    <div class="row">
+        <label>Hobbies:</label>
+        <input type="checkbox" class="hobby"> Writing
+        <input type="checkbox" class="hobby"> Reading
+        <input type="checkbox" class="hobby"> Swimming
+        <input type="checkbox" class="hobby"> Sleeping
+        <div class="error" id="hobbyError"></div>
+    </div>
+
+    <button>Register</button>
+    <button type="button" id="clear">Clear</button>
+</form>
+
+<script>
+const ids = ["name","country","zip","email","nameError","emailError","hobbyError"];
+const el = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
+const hobbies = document.querySelectorAll(".hobby");
+
+window.onload = () => el.name.focus();
+
+
+el.name.onblur = () => {
+    const regex = /^[A-Za-z\u0600-\u06FF\s]+$/;
+
+    if (!el.name.value.trim()) {
+        el.nameError.textContent = "Name is required";
+        el.name.focus();
+    } 
+    else if (!regex.test(el.name.value)) {
+        el.nameError.textContent = "Name must contain letters only";
+        el.name.focus();
+    } 
+    else {
+        el.nameError.textContent = "";
+    }
+};
+
+
+el.country.onchange = () =>
+    el.zip.value = { Egypt:"1111", USA:"90210", KSA:"11461" }[el.country.value] || "";
+
+
+el.email.onblur = () =>
+    el.emailError.textContent =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.email.value)
+        ? "" : "Invalid email";
+
+
+form.onsubmit = e => {
+    if (![...hobbies].some(h => h.checked)) {
+        e.preventDefault();
+        el.hobbyError.textContent = "Select at least one hobby";
+    }
+};
+
+
+clear.onclick = () =>
+    confirm("Clear form?") && form.reset();
+</script>
+
+</body>
+</html>

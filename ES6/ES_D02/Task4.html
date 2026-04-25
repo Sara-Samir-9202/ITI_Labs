@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <title> Task_4</title>
+    </head>
+    <body>
+      <script>
+        class Shape {
+          #color;
+
+         constructor(color) {
+         this.color = color;
+        }
+
+        get color() {
+        return this.#color;
+        }
+
+        set color(value) {
+          if (typeof value !== "string" || value.trim() === "") {
+          throw new Error("Color must be a non-empty string");
+          }
+        this.#color = value.trim();
+        }
+
+        DrawShape() {
+        console.log("Shape color is:", this.#color);
+        }
+     }
+
+     class Rectangle extends Shape {
+        constructor(color, height, width) {
+        super(color);
+        this.height = height;
+        this.width = width;
+        }
+
+        getArea() {
+         console.log("Rectangle color is:", this.color);
+         return this.height * this.width;
+        }
+     }
+
+     class Square extends Rectangle {
+        constructor(color, side) {
+        super(color, side, side);
+        }
+
+        getArea() {
+         console.log("Square color is:", this.color);
+         return this.height * this.width;
+        }
+     }
+
+     class Circle extends Shape {
+        constructor(color, radius) {
+        super(color);
+        this.radius = radius;
+     }
+
+        getArea() {
+        console.log("Circle color is:", this.color);
+        return Math.PI * this.radius * this.radius;
+        }
+    }
+
+    const shapes = [
+    new Rectangle("Red", 4, 5),
+    new Square("Blue", 6),
+    new Circle("Green", 3),
+    ];
+
+    shapes.forEach(shape => {
+      console.log("Area:", shape.getArea());
+      console.log("-------------------");
+    });
+   </script>
+</body>
+</html>

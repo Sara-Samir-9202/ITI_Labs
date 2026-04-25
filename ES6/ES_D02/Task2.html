@@ -1,0 +1,61 @@
+<html>
+<head>
+    <title>Task_2</title>   
+</head>
+<body>
+<script>
+class Shape {
+    #color;
+
+    constructor(color) {
+        this.color = color; 
+    }
+
+    get color() {
+        return this.#color;
+    }
+
+    set color(value) {
+        if (typeof value !== "string" || value.trim() === "") {
+            throw new Error("Color must be a non-empty string");
+        }
+        this.#color = value.trim();
+    }
+
+    DrawShape() {
+        console.log("Shape color is:", this.#color);
+    }
+}
+
+class Rectangle extends Shape {
+    constructor(color, width, height){
+        super(color);
+        this.width = width;
+        this.height = height;
+    }
+
+    getArea(){
+        console.log("Rectangle color is:", this.color); 
+        return this.width * this.height;
+    }
+}
+
+class Square extends Rectangle {
+    constructor(color, side){
+        super(color, side, side);
+    }
+
+    getArea(){
+        console.log("Square color is:", this.color); 
+        return this.width * this.height;
+    }
+}
+
+const rect = new Rectangle("blue", 4, 5);
+console.log("Rectangle Area:", rect.getArea());
+
+const squ = new Square("Red", 7);
+console.log("Square Area:", squ.getArea());
+</script>
+</body>
+</html>

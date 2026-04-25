@@ -1,0 +1,46 @@
+<html>
+<head>
+    <title>Task_1</title>
+</head>
+<body>
+
+<script type="module">
+
+    class Shape {
+        
+        #color;
+
+        constructor(color) {
+            this.Color = color; 
+        }
+
+        get Color() {
+            return this.#color;
+        }
+
+  
+        set Color(value) {
+            if (typeof value !== "string" || value.trim() === "") {
+                throw new Error("Color must be a non-empty string");
+            }
+            this.#color = value.trim();
+        }
+
+    
+        DrawShape() {
+            console.log("Shape color is:", this.#color);
+        }
+    }
+
+    const shape1 = new Shape("Red");
+    shape1.DrawShape();
+
+    shape1.Color = "Blue"; 
+    shape1.DrawShape();
+
+    console.log("Current Color:", shape1.Color); 
+</script>
+
+</body>
+</html>
+

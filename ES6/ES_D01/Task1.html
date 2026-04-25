@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task_1</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+            padding: 20px;
+        }
+        input, button {
+            padding: 8px;
+            margin-top: 10px;
+            width: 300px;
+            font-weight: bold;
+        }
+        .result {
+            background: white;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h4>Enter Numbers separated with commas</h4>
+
+<input type="text" id="numbers" placeholder="Example: 10, 25, 60, 90">
+<br>
+<button onclick="processArray()">Run</button>
+
+<div id="error" class="error"></div>
+<div id="output"></div>
+
+<script>
+let processArray = () => {
+    let input = document.getElementById("numbers").value.trim();
+    let error = document.getElementById("error");
+    error.textContent = "";
+    document.getElementById("output").innerHTML = "";
+
+    
+    if (!input)
+        return error.textContent = "Please enter numbers";
+
+        
+    if (!/^[\d,\s]+$/.test(input))
+        return error.textContent = "Only numbers and commas are allowed";
+
+    let numbers = input
+        .split(",")
+        .map(n => n.trim())
+        .filter(n => n !== "")   
+        
+        .map(n => Number(n));
+
+    
+        
+    if (numbers.length === 0)
+        return error.textContent = "You must enter at least one number";
+
+    
+    if (numbers.some(isNaN))
+        return error.textContent = "Invalid number format";
+
+    let asc = [...numbers].sort((a, b) => a - b);
+    let desc = [...numbers].sort((a, b) => b - a);
+    let greaterThan50 = numbers.filter(n => n > 50);
+
+    document.getElementById("output").innerHTML = `
+        <div class="result"><b>Original Array:</b> ${numbers.join(", ")}</div>
+        <div class="result"><b>Ascending:</b> ${asc.join(", ")}</div>
+        <div class="result"><b>Descending:</b> ${desc.join(", ")}</div>
+        <div class="result"><b>Numbers > 50:</b> ${greaterThan50.join(", ")}</div>
+        <div class="result"><b>Max:</b> ${Math.max(...numbers)}</div>
+        <div class="result"><b>Min:</b> ${Math.min(...numbers)}</div>
+    `;
+};
+</script>
+
+
+</body>
+</html>

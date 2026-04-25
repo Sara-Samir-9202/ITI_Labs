@@ -1,0 +1,84 @@
+<html>
+<head>
+    <title>Task_3</title>
+</head>
+<body>
+
+<button onclick="createProject()">Create a Project</button>
+
+<script>
+function createProject() {
+    const project = {};
+    const fieldsCount = 3;
+
+    for (let i = 0; i < fieldsCount; i++) {
+
+        let fieldName;
+        while (true) {
+            fieldName = prompt("Enter field name:");
+
+            if (!fieldName || fieldName.trim() === "") {
+                alert("Field name cannot be empty!");
+            }
+            else if (!/^[A-Za-z][A-Za-z0-9_]*$/.test(fieldName.trim())) {
+                alert("Field name must start with a letter (letters, numbers, _ allowed)");
+            }
+            else {
+                fieldName = fieldName.trim();
+                break;
+            }
+        }
+
+
+        let value;
+        while (true) {
+            value = prompt("Enter value for " + fieldName + ":");
+
+            if (!value || value.trim() === "") {
+                alert("Value cannot be empty!");
+                continue;
+            }
+
+            value = value.trim();
+
+
+            if (fieldName.toLowerCase() === "id") {
+                if (!/^\d+$/.test(value)) {
+                    alert("ID must be numbers only!");
+                } else {
+                    project[fieldName] = Number(value);
+                    break;
+                }
+            }
+            else if (fieldName.toLowerCase() === "name") {
+                if (!/^[A-Za-z][A-Za-z0-9\s]*$/.test(value)) {
+                    alert("Name must start with a letter!");
+                } else {
+                    project[fieldName] = value;
+                    break;
+                }
+            }
+            else if (fieldName.toLowerCase() === "duration") {
+                if (!/^\d+$/.test(value)) {
+                    alert("Duration must be numbers only!");
+                } else {
+                    project[fieldName] = Number(value);
+                    break;
+                }
+            }
+            else {
+                project[fieldName] = value;
+                break;
+            }
+        }
+    }
+
+    console.log("Project Details");
+    console.log(project);
+
+    alert("Project created! Check the console.");
+}
+</script>
+
+</body>
+</html>

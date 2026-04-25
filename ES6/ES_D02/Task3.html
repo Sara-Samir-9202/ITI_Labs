@@ -1,0 +1,50 @@
+
+<html>
+<head>
+    <title>Task_3</title>   
+</head>
+<body>
+    <script>
+    class Shape {
+        #color;
+
+        constructor(color) {
+            this.Color = color; 
+        }
+
+        get color() {
+            return this.#color;
+        }
+
+        set Color(value) {
+            if (typeof value !== "string" || value.trim() === "") {
+                throw new Error("Color must be a non-empty string");
+            }
+            this.#color = value.trim();
+        }
+
+        DrawShape() {
+            console.log("Shape color is:", this.#color);
+        }
+    }
+ 
+    class Circle extends Shape{
+        constructor(color, radius, x, y){
+            super(color);
+            this.radius=radius;
+            this.x=x;
+            this.y=y;
+        }
+
+        getArea(){
+            console.log("Circle color is:", this.color);
+            return Math.PI * this.radius * this.radius ;
+        }
+    }
+        
+     const circle1 = new Circle("Green", 7, 0, 0 );
+     console.log("Area:", circle1.getArea());
+
+    </script>
+</body>
+</html>
