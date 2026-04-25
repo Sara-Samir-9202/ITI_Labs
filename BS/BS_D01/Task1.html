@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Layout</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        
+        
+        .custom-header {
+            background-color: #c8c9cb;
+            color: black;
+            padding: 15px 0;
+            height: 100px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+        
+        .header-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0;
+            text-align: left;
+        }
+        
+        .card-section {
+            height: 100%;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            margin-top: 30px; 
+        }
+        .card-section:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .section-header {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .badge-new {
+            font-size: 1em;
+            vertical-align: top;
+        }
+        .buttons-container {
+            margin: 30px 0;
+        }
+        .badge-bg-secondary {
+            vertical-align: top;
+        }
+        
+      
+        .display-5 {
+            width: 50%;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+       
+        .text-with-image {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+            margin-bottom: 30px;
+            align-items: start;
+        }
+        
+        
+        .text-content-full {
+            width: 70%;
+            background-color: #dca856e0;
+            padding: 20px;
+            border-radius: 8px;
+            min-height: 300px;
+        }
+        
+      
+        .image-content {
+            display: flex;
+            justify-content: flex-end;
+           
+        }
+        
+        .image-placeholder {
+            width: 300px;
+            height: 400px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+        
+       
+        .buttons-outside {
+            margin-top: 20px;
+            padding: 20px;
+            width: 50%;
+        }
+        
+        
+        .icon-container {
+            position: absolute;
+            top: -40px;  
+            left: 20px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+        }
+        
+        .section-icon {
+            color: #dc3545;
+            font-size: 2rem;
+            background-color: white;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            border: 3px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-left: 0;
+        }
+        
+        .title-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        
+        .card-section .section-header {
+            margin-top: 10px;
+        }
+        
+       
+        .dropdown-menu {
+            min-width: 200px;
+        }
+        
+        .dropdown-item.active,
+        .dropdown-item:active {
+            background-color: #0d6efd; 
+            color: white;
+        }
+        
+        .dropdown-divider {
+            margin: 0.5rem 0;
+        }
+        
+        .dropdown-section {
+            padding: 0.25rem 1.5rem;
+            font-size: 0.875rem;
+            color: #6c757d;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        
+        .dropdown-section:first-child {
+            margin-top: 0;
+        }
+      
+        @media (max-width: 768px) {
+            .text-with-image {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .image-content {
+                justify-content: center;
+            }
+            
+            .image-placeholder {
+                width: 100%;
+                max-width: 300px;
+                height: 150px;
+            }
+            
+            .display-5,
+            .buttons-outside {
+                width: 100%;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .icon-container {
+                position: static;
+                margin-bottom: -20px;
+                margin-top: -30px;
+            }
+            
+            .section-title {
+                margin-left: 0;
+            }
+            
+            .card-section {
+                margin-top: 40px;
+            }
+            
+            .dropdown-menu {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+   
+        <header class="custom-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="header-title">Bootstrap Template</h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        
+        <h1 class="display-5 mb-4">heading</h1>
+        
+    
+        <div class="text-with-image">
+         
+            <div class="text-content-full">
+                <p class="mb-0">
+                    officia quod ratione incidunt dolore vitae molestiae beatae et praesentium, alias quibusdam, cupiditate tempore iste numquam voluptas. Vero, asperiores maiores obcaecati dolorem incidunt recusandae dolores autem voluptatem cumque accusantium, itaque fugit optio placeat amet reiciendis commodi quis, consequatur dolor. Quod quam vero quas vitae harum veniam porro.
+                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisi
+                </p>
+            </div>
+         
+            <div class="image-content d-none d-md-block">
+                <div class="image-placeholder">
+                   <img src="1.jpg" alt="Image">
+                </div>
+            </div>
+        </div>
+
+        <div class="buttons-outside">
+            <div class="row">
+                <div class="col-auto">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            click button
+                        </button>
+                        <ul class="dropdown-menu">
+                          
+                            <li><div class="dropdown-section"></div></li>
+                            <li><a class="dropdown-item" href="#">item1</a></li>
+                            <li><a class="dropdown-item" href="#">item2</a></li>
+                            <li><a class="dropdown-item" href="#">item3</a></li>    
+                           
+                            <li><hr class="dropdown-divider"></li>
+                            
+                            <li><div class="dropdown-section"></div></li>
+                            <li><a class="dropdown-item" href="#">item4</a></li>
+                            <li><a class="dropdown-item" href="#">item5</a></li>
+                            <li><a class="dropdown-item" href="#">item6</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+             
+                <div class="col-auto">
+                    <button class="btn btn-success">click button</button>
+                </div>
+                
+          
+                <div class="col-auto">
+                    <button class="btn btn-info">click input</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card-section">
+                    <div class="icon-container">
+                        <i class="bi bi-envelope-fill section-icon"></i>
+                    </div>
+                    <div class="section-header">
+                        <div class="section-title">
+                            <div class="title-text">
+                                <h2 class="h4 mb-0">this is part1</h2>
+                            </div>
+                        </div>
+                        <span class="badge bg-success badge-new ms-auto">New</span>
+                    </div>
+                    
+                    <p class="mb-0">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card-section">
+               
+                    <div class="icon-container">
+                        <i class="bi bi-pencil-fill section-icon"></i>
+                    </div>
+                    <div class="section-header">
+                        <div class="section-title">
+                            <div class="title-text">
+                                <h2 class="h4 mb-0">this is part2</h2>
+                            </div>
+                        </div>
+                        <span class="badge bg-secondary ms-auto">5</span>
+                    </div>
+                    
+                    <p class="mb-0">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card-section">
+                    
+                    <div class="icon-container">
+                        <i class="bi bi-cloud-fill section-icon"></i>
+                    </div>
+                    <div class="section-header">
+                        <div class="section-title">
+                            <div class="title-text">
+                                <h2 class="h4 mb-0">this is part3</h2>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="mb-0">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownItems = document.querySelectorAll('.dropdown-item');
+            
+            dropdownItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                   
+                    dropdownItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

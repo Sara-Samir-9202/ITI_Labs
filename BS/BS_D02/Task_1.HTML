@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antonio Gaudi</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body {
+   font-family: 'Nunito', sans-serif;
+    }
+
+.page-wrapper {
+    min-height: 100vh;
+     background: url("Images/6.png") no-repeat center center fixed;
+      background-size: cover; 
+      padding-top: 15px;
+    }
+
+.nav-buttons {
+    padding: 15px 0;
+}
+
+.nav-buttons .btn {
+    background-color: #a8bdd0;
+    font-size: 18px;
+     padding: 12px 20px; margin: 5px 0;
+     border: 1px solid white;
+     border-radius: 20px 0px; width: 100%;
+    }
+
+
+@media (min-width: 768px) {
+    .nav-buttons .btn {
+         width: auto;
+         margin-right: 10px;
+        }
+        
+        }
+
+
+.hero-section img {
+    width: 100%;
+    height: auto;
+    max-height: 450px;
+    object-fit: contain;
+    display: block;
+    margin-bottom: 20px;
+}
+
+
+.content-section
+ {
+    padding: 20px 15px;
+}
+.content-card img {
+    width: 100%; 
+    height: auto;
+     max-height: 150px;
+      object-fit: cover;
+       border: 3px solid #444;
+        padding: 5px;
+         margin-bottom: 10px;
+    }
+
+.footer {
+    background: #1b67a9;
+    text-align: center;
+    padding: 15px 0; 
+    font-size: 9px; 
+    border: 1px solid #1b67a9; 
+    border-radius: 15px 0 15px 0; 
+    color: white; margin-top: 10px;
+}
+.footer a {
+    color: #073f70; 
+    text-decoration: underline;
+}
+
+
+@media (max-width: 767px) {
+    .hero-section img {
+        max-height: 250px;
+    }
+    .content-card {
+        display: flex; 
+        align-items: center; 
+        gap: 15px; 
+        flex-wrap: wrap;
+    }
+    .content-card .text-content {
+        flex: 1 1 55%;
+         order: 1;
+        }
+    .content-card img {
+        flex: 1 1 40%; 
+        max-height: 150px; 
+        order: 2;}
+}
+
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .hero-section img {max-height: 350px;}
+    .row-md-4 {
+        display: flex; 
+        flex-wrap: wrap; 
+        gap: 15px;
+    }
+    .row-md-4 .col-md-3 {flex: 1 1 22%; display: flex; flex-direction: column; align-items: center; text-align: center;}
+    .row-md-4 .content-card img {order: 1; margin-bottom: 10px;}
+    .row-md-4 .content-card .text-content {order: 2;}
+}
+
+
+@media (min-width: 992px) {
+    .hero-section img {max-height: 450px;}
+    .content-card {display: flex; align-items: center; gap: 20px;}
+    .content-card .text-content {flex: 1;}
+    .content-card img {flex: 1; max-height: 150px; order: 2; margin-bottom: 0;}
+}
+</style>
+</head>
+<body>
+<div class="page-wrapper">
+<div class="nav-buttons">
+    <div class="container-fluid d-flex flex-column flex-md-row">
+        <button class="btn">Gaudi</button>
+        <button class="btn">Park Guell</button>
+        <button class="btn">Casa Batllo</button>
+        <button class="btn">Casa Mila</button>
+    </div>
+</div>
+<div class="hero-section">
+    <img src="Images/1.png" alt="Gaudi">
+</div>
+<div class="content-section">
+    <div class="container">
+        <div class="row g-4 row-md-4">
+            <div class="col-12 col-md-6 col-lg-6 col-md-3">
+                <div class="content-card">
+                    <img src="Images/2.png" alt="Antonio Gaudi" class="img-fluid">
+                    <div class="text-content">
+                        <h5>Antonio Gaudi</h5>
+                        <p>Antonio Gaudí was a visionary Catalan architect, renowned for his unique approach that blended architecture with nature. Born in 1852, he dedicated his life to designing buildings that harmonize with their surroundings.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-6 col-md-3">
+                <div class="content-card">
+                    <img src="Images/3.png" alt="Park Guell" class="img-fluid">
+                    <div class="text-content">
+                        <h5>Park Guell</h5>
+                        <p>Park Güell is one of Gaudí's most famous masterpieces and a UNESCO World Heritage Site. Visitors can stroll along the serpentine benches and explore the vibrant colonnaded pathways.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-6 col-md-3">
+                <div class="content-card">
+                    <img src="Images/4.png" alt="Casa Batllo" class="img-fluid">
+                    <div class="text-content">
+                        <h5>Casa Batllo</h5>
+                        <p>Casa Batlló is a landmark building on Passeig de Gràcia in Barcelona, redesigned by Gaudí. The interiors are equally imaginative, with light wells and sculpted ceilings.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-6 col-md-3">
+                <div class="content-card">
+                    <img src="Images/5.png" alt="Casa Mila" class="img-fluid">
+                    <div class="text-content">
+                        <h5>Casa Mila</h5>
+                        <p>Casa Milà, also known as La Pedrera, is another iconic Gaudí masterpiece. The rooftop chimneys resemble abstract sculptures, while interior spaces use innovative solutions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <p>Copyright 2012. All rights reserved.</p>
+    <p>
+        Web design by Janine Warner. 
+        <a href="http://www.digitalfamily.com" target="_blank">www.digitalfamily.com</a>
+        Photos by <a href="https://www.istockphoto.com" target="_blank">www.istockphoto.com</a>
+    </p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</div>
+</body>
+</html>
