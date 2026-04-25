@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lad2 Drag&Drop</title>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        #main-wrapper {
+            width: 70%;
+            margin: auto;
+            border: 3px solid black;
+            border-radius: 10px;
+            box-shadow: 0px 0px 17px 18px rgba(243, 130, 90, 0.907) inset;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-height: 800px;
+            margin-bottom: 30px;
+            margin-top: 30px;
+        }
+
+        #img-container {
+            border: 2px solid black;
+            border-radius: 20px;
+            box-shadow: 0px 0px 10px 11px orange inset, -2px -2px 5px 7px orange inset;
+            display: flex;
+            gap: 5px;
+            padding: 10px
+        }
+
+        #img-container img {
+            height: 100px;
+            width: 130px;
+            border: 5px double rgb(35, 181, 181);
+            transition: all 1s;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        #img-container img:hover {
+            transform: rotate(360deg) scale(1.5);
+        }
+
+        #dragged-container {
+            border: 2px solid black;
+            border-radius: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            min-height: 120px;
+            box-shadow: 0px 0px 10px 11px orange inset, -2px -2px 5px 7px orange inset;
+        }
+
+        #dragged-container img {
+            height: 100px;
+            width: 130px;
+            border: 5px double blue;
+            margin: 5px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .last-item {
+            position: relative;
+        }
+
+        .last-item::after {
+            content: "آخر قطعة";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: red;
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .alert-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #ff4444;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: none;
+            font-weight: bold;
+            animation: fadeInOut 3s ease-in-out;
+        }
+
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            20% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            80% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <section id="main-wrapper">
+
+        <div id="img-container">
+            <img src="./images/1.png" id="img1" alt="img1" data-count="2" data-price="200">
+            <img src="./images/2.png" id="img2" alt="img2" data-count="5" data-price="400">
+            <img src="./images/3.png" id="img3" alt="img3" data-count="3" data-price="100">
+            <img src="./images/4.png" id="img4" alt="img4" data-count="2" data-price="30">
+            <img src="./images/5.png" id="img5" alt="img5" data-count="4" data-price="50">
+            <img src="./images/6.png" id="img6" alt="img6" data-count="1" data-price="500">
+            <img src="./images/7.png" id="img7" alt="img7" data-count="4" data-price="90">
+            <img src="./images/8.png" id="img8" alt="img8" data-count="2" data-price="40">
+        </div>
+
+        <div id="dragged-container"></div>
+
+    </section>
+
+    <p style="background-color: rgba(255, 68, 0, 0.877); margin:5px auto;width:40%; font-weight:600;padding:10px;text-align:center;border-radius:5px">
+        ImgCounts = <span id="count">0</span>
+    </p>
+    <p style="background-color: rgba(255, 68, 0, 0.877); margin:5px auto;width:40%; font-weight:600;padding:10px;text-align:center;border-radius:5px">
+        TotalPrice = <span id="price">0</span>
+    </p>
+
+    <div id="last-alert" class="alert-notification">
+        ⚠️ تنبيه: دي آخر قطعة هتنسحب من المنتج ده
+    </div>
+
+    <script>
+        let dropCount = 0;
+        let totalPrice = 0;
+
+        // دالة عرض تنبيه آخر قطعة
+        function showLastAlert() {
+            const alertBox = document.getElementById('last-alert');
+            alertBox.style.display = 'block';
+            setTimeout(() => {
+                alertBox.style.display = 'none';
+            }, 2500);
+        }
+
+        // drag start
+        function dragStart(e) {
+            const count = parseInt(e.target.dataset.count);
+            const parentId = e.target.parentElement.id;
+
+            if (count === 1 && parentId === 'img-container') {
+                showLastAlert();
+                e.target.classList.add('last-item');
+            }
+
+            e.dataTransfer.setData('src', e.target.src);
+            e.dataTransfer.setData('price', e.target.dataset.price);
+            e.dataTransfer.setData('from', parentId);
+            window.currentDraggedImg = e.target;
+        }
+
+        ['img-container', 'dragged-container'].forEach(id => {
+            document.getElementById(id).addEventListener('dragover', e => e.preventDefault());
+        });
+
+        // سحب إلى dragged-container
+        document.getElementById('dragged-container').addEventListener('drop', e => {
+            e.preventDefault();
+            const src = e.dataTransfer.getData('src');
+            const price = parseInt(e.dataTransfer.getData('price'));
+            const from = e.dataTransfer.getData('from');
+            if (from === 'dragged-container') return;
+
+            const original = [...document.querySelectorAll('#img-container img')].find(img => img.src === src);
+            if (!original) return;
+
+            original.dataset.count = Math.max(0, parseInt(original.dataset.count) - 1);
+            if (parseInt(original.dataset.count) === 0) original.classList.add('last-item');
+
+            const clone = document.createElement('img');
+            clone.src = src;
+            clone.dataset.price = price;
+            clone.draggable = true;
+            clone.addEventListener('dragstart', dragStart);
+            document.getElementById('dragged-container').appendChild(clone);
+
+            dropCount++;
+            totalPrice += price;
+            updateValues();
+        });
+
+        // الإرجاع بالسحب
+        document.getElementById('img-container').addEventListener('drop', e => {
+            e.preventDefault();
+            const from = e.dataTransfer.getData('from');
+            if (from !== 'dragged-container') return;
+
+            const src = e.dataTransfer.getData('src');
+            const price = parseInt(e.dataTransfer.getData('price'));
+
+            let original = [...document.querySelectorAll('#img-container img')].find(img => img.src === src);
+            if (!original) {
+                original = document.createElement('img');
+                original.src = src;
+                original.dataset.count = 0;
+                original.dataset.price = price;
+                original.draggable = true;
+                original.addEventListener('dragstart', dragStart);
+                document.getElementById('img-container').appendChild(original);
+            }
+
+            original.dataset.count = parseInt(original.dataset.count) + 1;
+            original.classList.remove('last-item');
+
+            window.currentDraggedImg.remove();
+
+            dropCount--;
+            totalPrice -= price;
+            updateValues();
+        });
+
+        // الإرجاع بالدبل كليك
+        document.getElementById('dragged-container').addEventListener('dblclick', e => {
+            if (e.target.tagName !== 'IMG') return;
+
+            const img = e.target;
+            const src = img.src;
+            const price = parseInt(img.dataset.price);
+
+            let original = [...document.querySelectorAll('#img-container img')].find(i => i.src === src);
+            if (!original) {
+                original = document.createElement('img');
+                original.src = src;
+                original.dataset.count = 0;
+                original.dataset.price = price;
+                original.draggable = true;
+                original.addEventListener('dragstart', dragStart);
+                document.getElementById('img-container').appendChild(original);
+            }
+
+            original.dataset.count = parseInt(original.dataset.count) + 1;
+            original.classList.remove('last-item');
+
+            img.remove();
+
+            dropCount--;
+            totalPrice -= price;
+            updateValues();
+        });
+
+        function updateValues() {
+            document.getElementById('count').innerText = Math.max(0, dropCount);
+            document.getElementById('price').innerText = Math.max(0, totalPrice);
+        }
+
+        document.querySelectorAll('#img-container img').forEach(img => {
+            img.addEventListener('dragstart', dragStart);
+        });
+    </script>
+</body>
+
+</html>

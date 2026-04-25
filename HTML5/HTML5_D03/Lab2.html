@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lad2 Drag&Drop</title>
+
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        #main-wrapper {
+            width: 70%;
+            margin: auto;
+            border: 3px solid black;
+            border-radius: 10px;
+            box-shadow: 0px 0px 17px 18px rgba(243, 130, 90, 0.907) inset;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-height: 800px;
+            margin-bottom: 30px;
+            margin-top: 30px;
+        }
+
+
+        #main-wrapper #img-container {
+            border: 2px solid black;
+            border-radius: 20px;
+            box-shadow: 0px 0px 10px 11px orange inset, -2px -2px 5px 7px orange inset;
+            display: flex;
+            gap: 5px;
+            padding: 10px
+        }
+
+        #main-wrapper #img-container img {
+            height: 100px;
+            width: 130px;
+            border: 5px double rgb(35, 181, 181);
+            transition: all 1s;
+            cursor: pointer;
+            margin: 5px;
+           
+        }
+
+        #main-wrapper #img-container img:hover {
+            transform: rotate(360deg) scale(1.5);
+        }
+
+        #main-wrapper #dragged-container {
+            border: 2px solid black;
+            border-radius: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            min-height: 120px;
+            box-shadow: 0px 0px 10px 11px orange inset, -2px -2px 5px 7px orange inset;
+
+        }
+        
+        #dragged-container img {
+            height: 100px;
+            width: 130px;
+            border: 5px double blue;
+            margin: 5px;
+            object-fit: contain;
+        }
+    </style>
+
+
+    <script>
+        let dropCount = 0;
+        let totalPrice = 0;
+        window.addEventListener('load', () => {
+
+            let imgs = document.querySelectorAll('#img-container img');
+            imgs.forEach(img => img.addEventListener('dragstart', (e) => {
+                console.log(e.target);
+                e.dataTransfer.setData('img', e.target.id);
+            }))
+
+            
+            document.getElementById('img-container').addEventListener('dragleave', (e) => {
+                e.preventDefault()
+            })
+
+            document.getElementById('dragged-container').addEventListener('dragenter', (e) => {
+                e.preventDefault();
+                document.getElementById('dragged-container').style.boxShadow = '10px 10px 5px 10px skyblue inset , -10px -10px 5px 10px skyblue inset'
+
+            })
+
+            document.getElementById('dragged-container').addEventListener('dragover', (e) => {
+                e.preventDefault()
+            })
+
+            document.getElementById('dragged-container').addEventListener('drop', (e) => {
+                e.preventDefault();
+
+                let img = document.getElementById(e.dataTransfer.getData('img'));
+                console.log(typeof img.dataset.count);
+
+                let count = parseInt(img.dataset.count);
+                let price = parseInt(img.dataset.price);
+
+                if (count > 1) {
+                    img.dataset.count = count - 1;
+                    let clone = img.cloneNode(true);
+                    clone.removeAttribute('id');
+                    clone.dataset.count = 1;
+                    clone.draggable = false;
+
+                    clone.style.height = '100px';
+                    clone.style.width = '130px';
+                    clone.style.border = '5px double blue';
+                    clone.style.margin = '5px';
+
+                    document.getElementById('dragged-container').appendChild(clone);
+                }
+                else {
+                    img.style.height = '100px';
+                    img.style.width = '130px';
+                    img.style.border = '5px double blue';
+                    img.style.margin = '5px';
+                    document.getElementById('dragged-container').appendChild(img);
+                }
+
+                dropCount++;
+                totalPrice += price;
+
+                document.getElementById('count').innerHTML = dropCount;
+                document.getElementById('price').innerHTML = totalPrice;
+                
+                document.getElementById('dragged-container').style.backgroundColor = 'lightgreen';
+            })
+
+       
+            document.getElementById('img-container').addEventListener('dragover', (e) => {
+                e.preventDefault();
+            });
+
+            document.getElementById('img-container').addEventListener('drop', (e) => {
+                e.preventDefault();
+                let img = document.getElementById(e.dataTransfer.getData('img'));
+                console.log(img);
+                
+                img.style.height = '100px';
+                img.style.width = '130px';
+                img.style.border = '5px double rgb(35, 181, 181)';
+                img.style.margin = '5px';
+                
+                document.getElementById('img-container').appendChild(img);
+                
+                img.draggable = true;
+                
+                document.getElementById('dragged-container').style.backgroundColor = '';
+            })
+            
+            document.querySelectorAll('#dragged-container img').forEach(img => {
+                img.addEventListener('dragstart', (e) => {
+                    e.dataTransfer.setData('img', e.target.id);
+                });
+            });
+            
+            document.getElementById('dragged-container').addEventListener('dragstart', (e) => {
+                if (e.target.tagName === 'IMG') {
+                    e.dataTransfer.setData('img', e.target.id);
+                }
+            });
+        })
+    </script>
+</head>
+
+<body>
+
+
+    <section id="main-wrapper">
+
+        <div id="img-container">
+            <img src="./images/1.png" id="img1" alt="img1" data-count="2" data-price="200">
+            <img src="./images/2.png" id="img2" alt="img2" data-count="5" data-price="400">
+            <img src="./images/3.png" id="img3" alt="img3" data-count="3" data-price="100">
+            <img src="./images/4.png" id="img4" alt="img4" data-count="2" data-price="30">
+            <img src="./images/5.png" id="img5" alt="img5" data-count="4" data-price="50">
+            <img src="./images/6.png" id="img6" alt="img6" data-count="1" data-price="500">
+            <img src="./images/7.png" id="img7" alt="img7" data-count="4" data-price="90">
+            <img src="./images/8.png" id="img8" alt="img8" data-count="2" data-price="40">
+        </div>
+        <div id="dragged-container"></div>
+    </section>
+
+    <p
+        style="background-color: rgba(255, 68, 0, 0.877); margin:5px auto;width:40%; font-weight:600;padding:10px;text-align:center;border-radius:5px">
+        ImgCounts = <span id="count"></span> </p>
+    <p
+        style="background-color: rgba(255, 68, 0, 0.877); margin:5px auto;width:40%; font-weight:600;padding:10px;text-align:center;border-radius:5px">
+        TotalPrice = <span id="price"></span> </p>
+    <div></div>
+</body>
+
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iNK Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f5f2;
+            color: #333;
+            line-height: 1.5;
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            background-color: #fff;
+            padding: 20px;
+            width: 220px;
+            min-width: 220px;
+            height: 100vh;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .logo {
+            font-size: 65px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: left;
+            border-bottom: 2px solid #8B4513;
+            padding-bottom: 10px;
+            position: relative;
+        }
+
+        .logo::before {
+            content: 'i';
+            color: #D2B48C;
+            display: inline-block;
+            position: relative;
+        }
+
+        .logo::after {
+            content: 'NK';
+            color: #8B4513;
+            margin-left: -0.1em;
+        }
+
+        .main-nav {
+            margin-bottom: 15px;
+        }
+
+        .nav-list {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 1px;
+        }
+
+        .nav-item a {
+            display: block;
+            padding: 10px 12px;
+            color: #5D4037;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            border-radius: 3px;
+            transition: all 0.3s; 
+        }
+
+        .nav-item a:hover {
+            background-color: #8B4513;
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 5px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background-color: #f5f5f5;
+            border-radius: 50%;
+            color: #8B4513;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: #8B4513;
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .text-widget {
+            margin-bottom: 5px;
+        }
+
+        .text-widget h3 {
+            font-size: 16px;
+            color: #5D4037;
+            margin-bottom: 5px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .text-widget p {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 3px;
+            line-height: 1.5;
+        }
+
+        .flickr-sidebar {
+            margin-bottom: 15px;
+        }
+
+        .flickr-sidebar h3 {
+            font-size: 16px;
+            color: #5D4037;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .flickr-grid-sidebar {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .flickr-item-sidebar {
+            height: 70px;
+            background-color: #f5f5f5;
+            border-radius: 3px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 11px;
+            position: relative;
+            transition: all 0.3s;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .flickr-item-sidebar:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .navbar {
+            background-color:#8B4513;
+            padding: 0;
+            border-bottom: 1px solid #eee;
+            width: 100%;
+        }
+
+        .navbar-nav {
+            display: flex;
+            justify-content:left;
+            align-items: center;
+            height: 50px;
+            gap: 15px;
+        }
+
+        .navbar-nav a {
+            padding: 10px 16px;
+            color: white;
+            text-decoration-color: #8B4513;
+            font-weight: 600;
+            font-size: 14px;
+            border-radius: 3px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .navbar-nav a:hover,
+        .navbar-nav a.active {
+            background-color: white;
+            color:#8B4513;
+        }
+
+        .portfolio-container {
+            flex: 1;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 0;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .portfolio-item {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            border: none;
+            overflow: hidden;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            margin: 0;
+            padding: 0;
+            transition: all 0.3s;
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.05);
+            z-index: 10;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 1200px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            body {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                min-height: auto;
+                max-height: 280px;
+            }
+            
+            .main-content {
+                height: calc(100vh - 280px);
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+            }
+            
+            .navbar-nav {
+                height: 45px;
+                gap: 10px;
+            }
+            
+            .navbar-nav a {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(6, 1fr);
+            }
+            
+            .sidebar {
+                max-height: 240px;
+                padding: 15px;
+            }
+            
+            .flickr-grid-sidebar {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .flickr-item-sidebar {
+                height: 55px;
+            }
+            
+            .navbar-nav {
+                flex-wrap: wrap;
+                height: auto;
+                padding: 8px;
+                gap: 4px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(12, 1fr);
+            }
+            
+            .flickr-grid-sidebar {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .navbar-nav a {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+            
+            .logo {
+                font-size: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo"></div>
+
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="#">PORTFOLIO</a></li>
+                <li class="nav-item"><a href="#">SECRET AGENT</a></li>
+                <li class="nav-item"><a href="#">MAIN HIRE</a></li>
+                <li class="nav-item"><a href="#">ABOUT US</a></li>
+                <li class="nav-item"><a href="#">BLOG</a></li>
+                <li class="nav-item"><a href="#">BUY THIS THEME</a></li>
+            </ul>
+        </nav>
+        
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+        </div>
+        
+        <div class="text-widget">
+            <h3>A Text Widget</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget quam orci hh hhhhh hhhhhh hhhhhhhh hh hhhh hhhhh</p>
+        </div>
+        
+        <div class="flickr-sidebar">
+            <h3>Flickr</h3>
+            <div class="flickr-grid-sidebar">
+                <img class="flickr-item-sidebar" src="images/1.png" alt="Flickr Image 1">
+                <img class="flickr-item-sidebar" src="images/1.png" alt="Flickr Image 2">
+                <img class="flickr-item-sidebar" src="images/1.png" alt="Flickr Image 3">
+                <img class="flickr-item-sidebar" src="images/1.png" alt="Flickr Image 4">
+            </div>
+        </div>
+    </aside>
+    
+    <main class="main-content">
+        <nav class="navbar">
+            <div class="navbar-nav">
+                <a href="#" class="active" data-filter="all">All</a>
+                <a href="#" data-filter="print">Print</a>
+                <a href="#" data-filter="motion">Motion</a>
+                <a href="#" data-filter="photography">Photography</a>
+                <a href="#" data-filter="illustration">Illustration</a>
+            </div>
+        </nav>
+        
+        <div class="portfolio-container">
+            <div class="portfolio-grid">
+                <div class="portfolio-item"><img src="images/4.png" alt="Portfolio Item 1"></div>
+                <div class="portfolio-item"><img src="images/4.png" alt="Portfolio Item 2"></div>
+                <div class="portfolio-item"><img src="images/4.png" alt="Portfolio Item 3"></div>
+                <div class="portfolio-item"><img src="images/4.png" alt="Portfolio Item 4"></div>
+                <div class="portfolio-item"><img src="images/4.png" alt="Portfolio Item 5"></div>
+                <div class="portfolio-item"><img src="images/4.png" alt="Portfolio Item 6"></div>
+                <div class="portfolio-item"><img src="images/4.png" alt="Portfolio Item 7"></div>
+                <div class="portfolio-item"><img src="images/4.png" alt="Portfolio Item 8"></div>
+                <div class="portfolio-item"><img src="images/4.png" alt="Portfolio Item 9"></div>
+                <div class="portfolio-item"><img src="images/4.png" alt="Portfolio Item 10"></div>
+                <div class="portfolio-item"><img src="images/4.png" alt="Portfolio Item 11"></div>
+                <div class="portfolio-item"><img src="images/4.png" alt="Portfolio Item 12"></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbarLinks = document.querySelectorAll('.navbar-nav a');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            
+            navbarLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    navbarLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    if (filterValue === 'all') {
+                        portfolioItems.forEach(item => {
+                            item.style.display = 'block';
+                        });
+                    } else {
+                        portfolioItems.forEach((item, index) => {
+                            if (index < 3) {
+                                item.style.display = 'block';
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

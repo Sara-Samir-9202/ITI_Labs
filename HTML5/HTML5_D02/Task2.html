@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITI - Information Technology Institute</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: space-evenly;
+            min-height: 10vh;
+            align-items: center;
+            background-color: #f8f9fa;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul > li {
+            list-style: none;
+        }
+
+        nav ul > li > a {
+            text-decoration: none;
+            font: bold 15px verdana;
+            color: rgb(235, 57, 57);
+            transition: color 0.3s;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+
+        nav ul > li > a:hover {
+            color: rgb(182, 115, 115);
+            background-color: rgba(235, 57, 57, 0.1);
+        }
+
+        .intro {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                              url(https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80);
+            background-position: center;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .intro > h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .intro > h3 {
+            font-size: 1.5rem;
+            margin: 1.5rem;
+            max-width: 800px;
+            line-height: 1.6;
+        }
+
+        .intro > button {
+            padding: 1.5rem 3rem;
+            border-radius: 0.5em;
+            font-weight: bold;
+            font-size: 1.1rem;
+            background: linear-gradient(to right, white, rgb(60, 142, 230));
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+            color: #333;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .intro > button:hover {
+            background: linear-gradient(to left, white, rgb(60, 142, 230));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .locations-section {
+            background-color: white;
+            padding: 60px 40px;
+        }
+
+        .main-heading {
+            font-family: 'Brush Script MT', cursive, serif;
+            font-size: 36px;
+            color: #e74c3c;
+            margin-bottom: 5px;
+            font-weight: normal;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .locations-container {
+            display: flex;
+            gap: 60px;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .map-area {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+            position: relative;
+        }
+
+        .map-wrapper {
+            position: relative;
+            width: 350px;
+            height: 320px;
+            margin-bottom: auto;
+            background: linear-gradient(135deg, #ab2f2f1b 0%, #764ba2 100%);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .map-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            background: white;
+            object-fit: cover;
+        }
+
+        .locations-list {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .location-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            transition: all 0.3s;
+            border-left: 4px solid #ccc;
+        }
+
+        .location-item:hover {
+            background-color: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .location-item.main-color {
+            background-color: #ffe5e5;
+            border-left: 4px solid #ff0000;
+        }
+
+        .location-item.branch-color {
+            background-color: #d4edff;
+            border-left: 4px solid #007bff;
+        }
+
+        .pin {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .pin.main-color {
+            color: #ff0000;
+        }
+
+        .pin.branch-color {
+            color: #007bff;
+        }
+
+        .location-name {
+            color: #333;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .legend {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .legend-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .legend-item label {
+            font-size: 13px;
+            color: #666;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .legend-item:nth-child(1) label {
+            color: #ff0000;
+        }
+
+        .legend-item:nth-child(2) label {
+            color: #007bff;
+        }
+
+        .footer {
+            background-color: #2c2c2c;
+            color: white;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .footer-section h3 {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .contact {
+            flex: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .contact-item i {
+            margin-top: 3px;
+            font-size: 16px;
+        }
+
+        .social {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .social-icon.facebook {
+            background-color: #3b5998;
+            color: white;
+        }
+
+        .social-icon.twitter {
+            background-color: #1da1f2;
+            color: white;
+        }
+
+        .social-icon.youtube {
+            background-color: #ff0000;
+            color: white;
+        }
+
+        .social-icon i {
+            font-size: 18px;
+        }
+
+        @media (max-width: 992px) {
+            .locations-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 40px;
+            }
+
+            .map-wrapper {
+                width: 100%;
+                max-width: 500px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .intro > h1 {
+                font-size: 2.5rem;
+            }
+
+            .intro > h3 {
+                font-size: 1.2rem;
+            }
+
+            .intro > button {
+                padding: 1.2rem 2.5rem;
+            }
+
+            .locations-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 20px 0;
+                min-height: auto;
+            }
+
+            nav ul > li {
+                margin: 5px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .intro > h1 {
+                font-size: 2rem;
+            }
+
+            .intro > h3 {
+                font-size: 1rem;
+            }
+
+            .locations-section {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Gallery</a></li>
+        </ul>
+    </nav>
+
+    <section class="intro">
+        <h1>Information Technology Institute</h1>
+        <h3>ITP Tracks, free scholarships for postgraduates and professionals seeking advancement in the IT field</h3>
+        <button>Register Now</button>
+    </section>
+
+    <section class="locations-section">
+        <h2 class="main-heading">ITI Locations</h2>
+        <p class="subtitle">ITI Main Locations all over the country</p>
+
+        <div class="locations-container">
+            <div class="map-area">
+                <div class="map-wrapper">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Ancient_Egypt_map-en.svg/640px-Ancient_Egypt_map-en.svg.png" 
+                         alt="Egypt Map" 
+                         class="map-image">
+                </div>
+            </div>
+
+            <div class="locations-list">
+                <div class="locations-grid">
+                    <div class="location-item" data-type="main">
+                        <span class="pin"><i class="fa-solid fa-location-dot"></i></span>
+                        <span class="location-name">ITI - Smart Village</span>
+                    </div>
+                    <div class="location-item" data-type="branch">
+                        <span class="pin"><i class="fa-solid fa-location-dot"></i></span>
+                        <span class="location-name">ITI - Alexandria</span>
+                    </div>
+                    <div class="location-item" data-type="branch">
+                        <span class="pin"><i class="fa-solid fa-location-dot"></i></span>
+                        <span class="location-name">ITI - Assuit</span>
+                    </div>
+                    <div class="location-item" data-type="branch">
+                        <span class="pin"><i class="fa-solid fa-location-dot"></i></span>
+                        <span class="location-name">ITI - Aswan</span>
+                    </div>
+                    <div class="location-item" data-type="branch">
+                        <span class="pin"><i class="fa-solid fa-location-dot"></i></span>
+                        <span class="location-name">ITI - Ismailia</span>
+                    </div>
+                    <div class="location-item" data-type="branch">
+                        <span class="pin"><i class="fa-solid fa-location-dot"></i></span>
+                        <span class="location-name">ITI - Mansoura</span>
+                    </div>
+                    <div class="location-item" data-type="branch">
+                        <span class="pin"><i class="fa-solid fa-location-dot"></i></span>
+                        <span class="location-name">ITI - Menofia</span>
+                    </div>
+                    <div class="location-item" data-type="branch">
+                        <span class="pin"><i class="fa-solid fa-location-dot"></i></span>
+                        <span class="location-name">ITI - Minya</span>
+                    </div>
+                </div>
+
+                <div class="legend">
+                    <div class="legend-item">
+                        <input type="checkbox" id="mainBranchCheck">
+                        <label for="mainBranchCheck">Main Branch</label>
+                    </div>
+                    <div class="legend-item">
+                        <input type="checkbox" id="branchCheck">
+                        <label for="branchCheck">Branch</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section contact">
+                <h3>CONTACT US</h3>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>28 Km by Cairo / Alexandria Desert Road, 6<br>October, Egypt</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>(+202) 383-56866</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>ITI-info@iti.gov.eg</span>
+                </div>
+            </div>
+
+            <div class="footer-section social">
+                <h3>FOLLOW US</h3>
+                <div class="social-icons">
+                    <a href="#" class="social-icon facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-icon twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon youtube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const mainBranchCheck = document.getElementById('mainBranchCheck');
+        const branchCheck = document.getElementById('branchCheck');
+        const locationItems = document.querySelectorAll('.location-item');
+        const pins = document.querySelectorAll('.pin');
+
+        function updateColors() {
+            const showMainColor = mainBranchCheck.checked;
+            const showBranchColor = branchCheck.checked;
+
+            locationItems.forEach(item => {
+                const type = item.getAttribute('data-type');
+                
+                item.classList.remove('main-color', 'branch-color');
+                
+                const pin = item.querySelector('.pin');
+                pin.classList.remove('main-color', 'branch-color');
+                
+                if (type === 'main' && showMainColor) {
+                    item.classList.add('main-color');
+                    pin.classList.add('main-color');
+                }
+                
+                if (type === 'branch' && showBranchColor) {
+                    item.classList.add('branch-color');
+                    pin.classList.add('branch-color');
+                }
+            });
+        }
+
+        mainBranchCheck.addEventListener('change', updateColors);
+        branchCheck.addEventListener('change', updateColors);
+
+        document.querySelector('.intro button').addEventListener('click', function() {
+            alert('Registration form will open soon! Thank you for your interest in ITI programs.');
+        });
+
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                
+                if (targetId === '#') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

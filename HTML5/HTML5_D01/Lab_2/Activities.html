@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Activities</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin: 2rem 0;
+            color: #333;
+        }
+        .activities {
+            max-width: 1200px;
+            margin: 2rem auto;
+            text-align: center;
+        }
+        .activity {
+            display: inline-block;
+            vertical-align: top;
+            background-color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            width: 250px;
+            margin: 0 15px 30px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s;
+            overflow: hidden;
+        }
+        .activity:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+        .activity img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.5s ease;
+            transform-origin: bottom;
+        }
+        .activity:hover img {
+            transform: translateY(-20px) scale(1.15);
+        }
+        .activity p {
+            margin-top: 0.5rem;
+            color: #555;
+            font-size: 0.95rem;
+            transition: transform 0.5s ease;
+        }
+        .activity:hover p {
+            transform: translateY(-10px);
+        }
+        .icons {
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.5s ease;
+            transform: translateY(20px);
+            padding: 10px;
+            background-color: rgb(0, 170, 255);
+            border-radius: 5px;
+            margin-left: -10px;
+            margin-right: -10px;
+            
+        }
+        .activity:hover .icons {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+        .icons i {
+            margin: 0 8px;
+            font-size: 1rem;
+            color: white;
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s, background-color 0.2s;
+            padding: 5px;
+            border-radius: 50%;
+        }
+        .icons i:hover {
+            transform: scale(1.2);
+            background-color: white;
+            color: blue;
+        }
+        .icons i.active {
+            background-color: black;
+            color: blue;
+        }
+        @media (max-width: 800px) {
+            .activity {
+                display: block;
+                width: 80%;
+                margin: 1rem auto;
+            }
+        }
+        .fade img {
+            opacity: 0.4;
+            transition: opacity 0.3s, transform 0.5s ease;
+        }
+        .fade p {
+            opacity: 0;
+            transition: opacity 0.3s, transform 2s ease;
+        }
+        .fade:hover img {
+            opacity: 1;
+            transform: translateY(-20px) scale(1.15);
+        }
+        .fade:hover p {
+            opacity: 1;
+            transform: translateY(-10px);
+        }
+    </style>
+</head>
+<body>
+    <h1>Activities</h1>
+    <div class="activities">
+        <div class="activity">
+            <img src="images/2.png" alt="Activity 1">
+            <div class="icons">
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores a minus, recusandae animi vitae quo.</p>
+        </div>
+        <div class="activity">
+            <img src="images/2.png" alt="Activity 2">
+            <div class="icons">
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores a minus, recusandae animi vitae quo.</p>
+        </div>
+        <div class="activity">
+            <img src="images/2.png" alt="Activity 3">
+             <div class="icons">
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores a minus, recusandae animi vitae quo.</p>
+        </div>
+        <div class="activity">
+            <img src="images/2.png" alt="Activity 4">
+             <div class="icons">
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores a minus, recusandae animi vitae quo.</p>
+        </div>
+        <div class="activity fade">
+            <img src="images/2.png" alt="Activity 5">
+            <div class="icons">
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores a minus, recusandae animi vitae quo.</p>
+        </div>
+        <div class="activity fade">
+            <img src="images/2.png" alt="Activity 6">
+             <div class="icons">
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores a minus, recusandae animi vitae quo.</p>
+        </div>
+        <div class="activity fade">
+            <img src="images/2.png" alt="Activity 7">
+             <div class="icons">
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores a minus, recusandae animi vitae quo.</p>
+        </div>
+        <div class="activity fade">
+            <img src="images/2.png" alt="Activity 8">
+             <div class="icons">
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores a minus, recusandae animi vitae quo.</p>
+        </div>
+    </div>
+    <script>
+        const icons = document.querySelectorAll('.icons i');
+        icons.forEach(icon => {
+            icon.addEventListener('click', () => {
+                icon.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

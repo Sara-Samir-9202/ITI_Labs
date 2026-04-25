@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 3 Location</title>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB90FxtYG_ybAYXGkz0ybkmkboE2nEbezI"></script>
+
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        #main-wrapper {
+            width: 80%;
+            margin: auto;
+            border-radius: 8px;
+            box-shadow: 0px 0px 20px 20px lab(61.18% 12.03 48.2) inset, -0px -0px 20px rgb(228, 154, 43) inset;
+            display: flex;
+            flex-direction: column;
+            row-gap: 10px;
+            padding: 20px;
+            border: 2px solid black;
+            margin-top: 50px;
+        }
+
+        #main-wrapper #loc-button,
+        #main-wrapper #loc-map {
+            border: 2px solid black;
+            background-color: rgb(241, 211, 156);
+            text-align: center;
+            border-radius: 30px;
+            padding: 15px;
+            box-shadow: 0px 1px 7px rgb(211, 149, 56) inset;
+        }
+
+        #main-wrapper #loc-button>button {
+            padding: 10px 15px;
+            color: white;
+            width: 200px;
+            background: linear-gradient(to bottom, rgb(81, 93, 228), rgb(25, 57, 215));
+            border: 2px solid rgb(227, 142, 16);
+            border-radius: 9px;
+            margin-right: 10px;
+            transition: all 1s;
+
+        }
+
+        #main-wrapper #loc-button>button:hover {
+            transform: skew(20deg) scale(1.1);
+            cursor: pointer;
+
+        }
+
+        #main-wrapper #loc-map {
+            border-radius: 10px;
+            height: 500px;
+            padding: 20px
+        }
+
+        #main-wrapper #loc-map #map {
+            border: 2px solid rgb(198, 127, 20);
+            box-shadow: 5px 5px 5px rgb(180, 123, 36), -5px -5px 5px rgb(225, 146, 28);
+            height: 100%;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 30px;
+            transition:all 0.5s;
+        }
+    </style>
+
+
+    <script>
+
+        window.addEventListener('load', () => {
+            let lat, long, acc, timeStamp;
+            let mapDiv = document.getElementById('map');
+            document.getElementById('display-map').addEventListener('click', (e) => {
+
+                console.log(mapDiv);
+
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition((e) => {
+                        console.log(e);
+                        lat = e.coords.latitude;
+                        long = e.coords.longitude;
+                        acc = e.coords.accuracy;
+                        timeStamp = e.timestamp;
+                        let location = new google.maps.LatLng(lat, long)
+                        let spec = { zoom: 20, center: location, border: '1px solid black' }
+                        new google.maps.Map(mapDiv, spec)
+                    }
+                        , () => {
+                            mapDiv.innerHTML += ' <p style="padding:20px;width:50%;margin:auto;color:white;font-size:20px;background-color:olive;border-radius:20px;"> Ok , See U Later ! </p>'
+                        })
+                }
+
+                else {
+                    mapDiv.innerHTML += ' <p style="padding:20px;width:50%;margin:auto;color:white;font-size:20px;background-color:olive;border-radius:20px;"> Update Your Browser ! </p>'
+                }
+            })
+
+
+
+
+            document.getElementById('details').addEventListener('click', (e) => {
+                if (lat) {
+
+                    mapDiv.innerHTML =
+                      
+                   `<div  onclick='changebgColor(event)' style='margin-top:10px; width:70%;margin:auto;text-align:center;border:1px solid black; border-radius:50px; background: linear-gradient(to bottom, LightOrange, DarkOrange);'>
+                       <ul>
+                        <li style="margin:20px auto">
+                            <p>Latitute (degree)</p>
+                            <p style=" background: linear-gradient(to bottom, white, orange); padding:5px;border-radius:3px;margin-top: 5px;">${lat}</p>
+                        </li>
+
+                         <li style="margin:auto">
+                            <p>Longtuide</p>
+                            <p style="background: linear-gradient(to bottom, white, orange); padding:5px;border-radius:3px;margin-top: 5px;">${long}</p>
+                        </li>
+
+                         <li style="margin:auto">
+                            <p>Accuracy</p>
+                            <p style="background: linear-gradient(to bottom, white, orange); padding:5px;border-radius:3px;margin-top: 5px;">${acc}</p>
+                        </li>
+
+                         <li style="margin:auto">
+                            <p>TimeStamp (Current Time and Date)</p>
+                            <p style="background: linear-gradient(to bottom, white, orange); padding:5px;border-radius:3px;margin-top: 5px;">${Date(timeStamp)}</p>
+                        </li>
+
+
+                        
+                       </ul>
+           
+                    </div>
+                    
+                    `
+                    console.log(lat, long, acc, timeStamp);
+                } else {
+                    mapDiv.innerHTML += ' <p style="padding:20px;width:50%;margin:auto;color:white;font-size:20px;background-color:olive;border-radius:20px;">Show Location First  </p>'
+
+                }
+            })
+
+        })
+
+        function changebgColor(e) {
+            console.log(e.target.nodeName);
+
+            if(e.target.nodeName === 'UL') {
+
+                e.target.style.background = 'linear-gradient(to bottom, yellow, blue)'
+                e.target.style.transform ='scale(1.1)'
+               
+            }
+
+        }
+
+    </script>
+</head>
+
+<body>
+
+    <section id="main-wrapper">
+
+        <div id="loc-button">
+            <button id="display-map">Display Map</button>
+            <button id="details">Detailed information</button>
+        </div>
+
+        <div id="loc-map">
+            <div id="map">
+
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

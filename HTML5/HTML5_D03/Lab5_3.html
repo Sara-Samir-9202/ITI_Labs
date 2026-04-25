@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab_5.3</title>
+</head>
+
+<script>
+    let isDrawable = false; 
+    window.addEventListener('load' , (e) => 
+    {
+        let canvas = document.getElementById('canvas');
+        canvas.width = window.innerWidth * 0.9;
+        canvas.height = window.innerHeight *0.9
+        let context = canvas.getContext('2d');
+
+
+        canvas.addEventListener('mousemove',(e) => 
+        {
+            if(isDrawable) {
+
+                context.rect(e.offsetX , e.offsetY , 50 ,50)
+                context.fill();
+            }
+        })
+
+        canvas.addEventListener('mousedown', enableDrawing)
+        canvas.addEventListener('mouseup', disableDrawing)
+         
+    })
+    function enableDrawing()
+    {
+        isDrawable = true;
+    }
+
+    function disableDrawing()
+    {
+        isDrawable = false;
+    }
+</script>
+<body>
+        <canvas id="canvas" ></canvas>
+</body>
+</html>

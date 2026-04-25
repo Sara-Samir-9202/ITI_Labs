@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>ITI - Home</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+            box-sizing:border-box;
+        }
+        ul{
+            display:flex;
+            justify-content:space-evenly;
+            min-height:10vh;
+            align-items:center;
+        }
+        ul>li{
+            list-style:none;
+        }
+        ul>li>a{
+            text-decoration:none;
+            font:bold 15px verdana;
+            color:rgb(235 57 57);
+        }
+        ul > li > a:hover {
+            color: rgb(182 115 115);
+        }
+        .intro{
+            height:90vh;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            background-image:url(images/laptop_top.jpg);
+            background-position:center;
+            background-size:cover;
+            color:white;
+        }
+        .intro>h3{
+            font-size:2rem;
+            margin:1.5rem;
+        }
+
+        .intro>p{
+            font: 1.5em sans-serif;
+            margin:1.5rem;
+        }
+
+        .intro > button {
+            display: inline-block;
+            border-radius: 15px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            background: rgb(60, 142, 230);
+            transition: 0.3s;
+            padding: 15px 30px;
+            width: 150px;
+        }
+        .intro > button:hover {
+            background: linear-gradient(to left, white,rgb(60 142 230));
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Gallery</a></li>
+    </ul>
+    <section class="intro">
+
+        <h3>ITI MANSOURA</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        <button onclick="window.open('activities.html', '_blank')">Register</button>
+    </section>
+</body>
+</html>
+
