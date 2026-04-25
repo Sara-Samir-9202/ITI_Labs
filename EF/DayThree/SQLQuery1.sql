@@ -1,0 +1,2 @@
+ALTER TABLE Students
+ADD St_Email NVARCHAR(50) NULL;
