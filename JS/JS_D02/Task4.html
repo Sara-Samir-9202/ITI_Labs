@@ -1,0 +1,26 @@
+<html>
+<head>
+    <title>User Data</title>
+</head>
+<body>
+
+<script>
+    var name;
+    var mobile;
+
+    var namePattern = /^[A-Za-z]+$/;
+    do {
+        name = prompt("Enter your name (letters only):");
+    } while (!namePattern.test(name));
+
+    var mobilePattern = /^(010|011|012|015)-\d{8}$/;
+    do {
+        mobile = prompt("Enter your mobile number (xxx-xxxxxxxx):");
+    } while (!mobilePattern.test(mobile));
+
+    document.write("<h3><span style='color:blue;'>Name:</span> " + name + "</h3>");
+    document.write("<h3><span style='color:blue;'>Mobile:</span> " + mobile + "</h3>");
+</script>
+
+</body>
+</html>

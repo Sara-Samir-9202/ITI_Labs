@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task4-3</title>
+</head>
+<body>
+
+<h2>Numbers with Equal Length</h2>
+
+<script>
+var arr = [10.2, 20, 34, 333.12345];
+
+for (var i = 0; i < arr.length; i++) {
+    var num = arr[i].toFixed(5);
+    
+    while (num.indexOf('.') < 3) {
+        num = "0" + num;
+    }
+
+    document.write(num + "<br>");
+}
+</script>
+
+</body>
+</html>

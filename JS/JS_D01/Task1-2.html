@@ -1,0 +1,32 @@
+<html> 
+<head> 
+    <title>Task_1</title>
+
+</head> 
+<body>
+    <script> 
+    var sum = 0;
+    var value;
+
+    while (true) {
+        value = prompt("Enter a number 0 to stop:");
+
+        value = Number(value);
+        if (isNaN(value)) {
+            alert("Enter a valid number!");
+            continue;
+        }
+        else if (value === 0) {
+            break;
+        }
+        sum += value;
+        if (sum > 100) {
+            break;
+        }
+    }
+        alert("Current sum: " + sum);
+    
+    </script>  
+    
+</body>
+</html>

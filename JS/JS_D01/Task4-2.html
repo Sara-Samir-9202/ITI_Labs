@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Number Locales Simple</title>
+</head>
+<body>
+
+<h2>Number in Different Locales</h2>
+
+<script>
+var userNumber = prompt("Enter a number:");
+var number = Number(userNumber);
+
+if (isNaN(number)) {
+    alert("Please enter a valid number!");
+} else {
+    var us = new Intl.NumberFormat("en-US").format(number);
+    var de = new Intl.NumberFormat("de-DE").format(number);
+    var ar = new Intl.NumberFormat("ar-EG").format(number);
+
+    document.write("US format: " + us + "<br>");
+    document.write("German format: " + de + "<br>");
+    document.write("Arabic format: " + ar + "<br>");
+}
+</script>
+
+</body>
+</html>
+

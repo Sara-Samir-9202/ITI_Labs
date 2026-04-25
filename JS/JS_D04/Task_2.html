@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task_2.html</title>
+
+    <style>
+        body{
+            font-family: Arial;
+            background:#eee;
+            padding:20px;
+        }
+
+        input{
+            padding:6px;
+            width:250px;
+        }
+
+        button{
+            padding:6px 15px;
+            cursor:pointer;
+            background:#777;
+            color:white;
+            border:none;
+            border-radius:4px;
+        }
+
+        .center{
+            text-align:center;
+        }
+
+        table{
+            width:60%;
+            margin: 20px auto;
+            border-collapse:collapse;
+            background:white;
+        }
+
+        th{
+            background:darkred;
+            color:white;
+            padding:8px;
+            border:2px solid black;
+        }
+
+        td{
+            text-align:center;
+            padding:8px;
+            border:2px solid black;
+        }
+
+     
+        .done{
+            text-decoration: line-through;
+            color: gray;
+            width: 250px;
+        }
+
+       
+        .done-row{
+            background:#f2f2f2;
+        }
+
+        .delete{
+            color:red;
+            cursor:pointer;
+            font-size:18px;
+        }
+
+th:nth-child(1),
+td:nth-child(1){
+    width: 90px;
+}   
+
+
+th:nth-child(3),
+td:nth-child(3){
+    width: 90px;
+}
+
+th:nth-child(2),
+td:nth-child(2){
+    width: auto;
+}
+
+    </style>
+</head>
+
+<body>
+
+    <h2 style="color: darkred;" align="center">To Do Organizer</h2>
+
+    <div class="center">
+        <input type="text" id="taskInput" placeholder="Enter Task Name">
+        <button onclick="addTask()">Add</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Done</th>
+                <th>Task</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+
+        <tbody id="taskTable"></tbody>
+    </table>
+
+<script>
+    let tasks = [];
+
+    function addTask(){
+        let taskName = document.getElementById("taskInput").value.trim();
+
+        // empty validation
+        if(taskName === ""){
+            alert("Task cannot be empty ❌");
+            return;
+        }
+
+        // numbers only validation
+        if(/^\d+$/.test(taskName)){
+            alert("Task name cannot be numbers only ❌");
+            return;
+        }
+
+        // duplicate validation
+        let exists = tasks.some(
+            t => t.name.toLowerCase() === taskName.toLowerCase()
+        );
+
+        if(exists){
+            alert("This task already exists ❌");
+            return;
+        }
+
+        tasks.push({
+            name: taskName,
+            done: false
+        });
+
+        document.getElementById("taskInput").value = "";
+        renderTasks();
+    }
+
+    function renderTasks(){
+        let table = document.getElementById("taskTable");
+        table.innerHTML = "";
+
+        tasks.forEach((task, index) => {
+            let row = `
+                <tr class="${task.done ? "done-row" : ""}">
+                    <td>
+                        <input type="checkbox"
+                            ${task.done ? "checked disabled" : ""}
+                            onclick="toggleDone(${index})">
+                    </td>
+
+                    <td class="${task.done ? "done" : ""}">
+                        ${task.name}
+                    </td>
+
+                    <td>
+                        <span class="delete" onclick="deleteTask(${index})">🗑</span>
+                    </td>
+                </tr>
+            `;
+            table.innerHTML += row;
+        });
+    }
+
+    function toggleDone(index){
+        tasks[index].done = true;
+        renderTasks();
+    }
+
+    function deleteTask(index){
+        let confirmDelete = confirm("R U Sure to delete this task ?");
+
+        if(confirmDelete){
+            tasks.splice(index,1);
+            renderTasks();
+        }
+    }
+</script>
+
+</body>
+</html>

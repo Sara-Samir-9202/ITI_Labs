@@ -1,0 +1,57 @@
+<html>
+<head>
+    <title>Count Down</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: blueviolet;
+            font-size: 50px;
+            margin-top: 80px;
+            transition: background-image 0.3s ease; 
+        }
+    </style>
+</head>
+<body>
+
+<div id="counter">10</div>
+
+<script>
+    let count = 10;
+    const counterDiv = document.getElementById("counter");
+
+
+    const images = [
+        "Images/1.png",
+        "Images/2.png",
+        "Images/3.png",
+        "Images/4.png",
+        "Images/5.png",
+        "Images/6.png",
+        "Images/7.png",
+        "Images/8.png",
+        "Images/9.png",
+        "Images/10.png"
+    ];
+
+    
+    const interval = setInterval(() => {
+        counterDiv.textContent = count;
+
+        document.body.style.backgroundImage = `url(${images[10 - count]})`;
+        document.body.style.backgroundSize = "cover";
+        document.body.style.backgroundRepeat = "no-repeat";
+        document.body.style.backgroundPosition = "center";
+     
+        if (count === 0) {
+            clearInterval(interval);
+            
+            window.close(); 
+        }
+
+        count--;
+    }, 1000);
+</script>
+
+</body>
+</html>

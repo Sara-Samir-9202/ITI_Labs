@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>Random Names</title>
+</head>
+<body>
+
+<script>
+    var arr = ["ahmed","ali","moustafa","ibraheem","alaa","hamada"];
+
+    var index1 = Math.floor(Math.random() * arr.length);
+    var index2;
+    do {
+        index2 = Math.floor(Math.random() * arr.length);
+    } while(index2 === index1); 
+
+    document.write("<h3 align='center'><font color='blue'>Random Names:</font></h3>");
+    document.write("<p align='center'>1: " + arr[index1] + "</p>");
+    document.write("<p align='center'>2: " + arr[index2] + "</p>");
+</script>
+
+</body>
+</html>

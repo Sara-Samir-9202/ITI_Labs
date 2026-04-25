@@ -1,0 +1,59 @@
+<html>
+<head>
+    <title>Task4-1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <p id="message" style="color: blueviolet;"></p>
+
+    <script>
+     
+        var messages = [
+            "Your message will disappear character by character",
+
+            "The window will close after few seconds..."
+        ];
+
+        var pElem = document.getElementById("message");
+        var currentMsgIndex = 0; 
+        var currentCharIndex = 0; 
+
+        function closeWindow() {
+            window.close();
+        }
+
+        function typeMessage() {
+            var currentMsg = messages[currentMsgIndex];
+            if (currentCharIndex < currentMsg.length) {
+                pElem.innerHTML += currentMsg[currentCharIndex];
+                currentCharIndex++;
+            } else {
+               
+                clearInterval(typingInterval);
+
+                currentMsgIndex++;
+                if (currentMsgIndex < messages.length) {
+               
+                    pElem.innerHTML += "<br>";
+                    currentCharIndex = 0;
+                    typingInterval = setInterval(typeMessage, 100);
+                } else {
+                   
+                    setTimeout(closeWindow, 2000); 
+                }
+            }
+        }
+
+        var typingInterval = setInterval(typeMessage, 80); 
+    </script>
+</body>
+</html>

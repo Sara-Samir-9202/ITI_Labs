@@ -1,0 +1,51 @@
+<html>
+<head>
+    <title>Task1-2</title>
+</head>
+<body>
+
+<script>
+    var arr;
+
+
+    function isAllNumbers(array) {
+        return array.every(item => !isNaN(item) && item.trim() !== "");
+    }
+
+ 
+    do {
+        arr = prompt("Enter numbers separated by commas:").split(",");
+    } while(!isAllNumbers(arr));
+
+    
+    var seen = {};
+    var repeatedRows = [];
+
+    for (var i = 0; i < arr.length; i++) {
+        if (seen[arr[i]] !== undefined) {
+            repeatedRows.push(i);
+        } else {
+            seen[arr[i]] = i;
+        }
+    }
+
+    
+    document.write("<table border='1' align='center' cellpadding='10' style='border-color:red;'>");
+    document.write("<tr><th>Values</th></tr>");
+
+    arr.forEach(function(value) {
+        document.write("<tr><td>" + value + "</td></tr>");
+    });
+
+    document.write("</table>");
+
+    
+    if (repeatedRows.length > 0) {
+        document.write("<p align='center'>");
+        document.write("<b>Repeated row numbers:</b> " + repeatedRows.join(", "));
+        document.write("</p>");
+    }
+</script>
+
+</body>
+</html>

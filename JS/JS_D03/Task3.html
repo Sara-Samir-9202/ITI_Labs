@@ -1,0 +1,170 @@
+<html lang="ar" dir="rtl">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide Show Game</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        h1.slide {
+            color: #5bc0de;
+        }
+
+        .slideshow-container {
+            position: relative;
+            background-color: #000;
+            border: 8px solid #ffd700;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .slide-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: none;
+        }
+
+        .slide-image.active {
+            display: block;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-prev, .btn-next {
+            background-color: #ffd700;
+            color: #fff;
+        }
+
+        .btn-play {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .btn-stop {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1><span class="slide">Slide Show</span> Game</h1>
+
+    <div class="slideshow-container">
+        <img src="https://picsum.photos/800/400?random=1" class="slide-image active">
+        <img src="https://picsum.photos/800/400?random=2" class="slide-image">
+        <img src="https://picsum.photos/800/400?random=3" class="slide-image">
+        <img src="https://picsum.photos/800/400?random=4" class="slide-image">
+        <img src="https://picsum.photos/800/400?random=5" class="slide-image">
+    </div>
+
+    <div class="controls">
+        <button class="btn-prev" onclick="prevSlide()">&#60;</button>
+        <button class="btn-stop" onclick="stopSlideshow()">Stop</button>
+        <button class="btn-play" onclick="playSlideshow()">Play</button>
+        <button class="btn-next" onclick="nextSlide()">&#62;</button>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 0;
+    let slideInterval = null;
+    let isPlaying = false;
+
+    const slides = document.querySelectorAll('.slide-image');
+    const totalSlides = slides.length;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
+    }
+
+    function nextSlide() {
+        if (!isPlaying) return;
+        currentSlide = (currentSlide + 1) % totalSlides;
+        showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+        if (!isPlaying) return;
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        showSlide(currentSlide);
+    }
+
+    function playSlideshow() {
+        if (!isPlaying) {
+            isPlaying = true;
+            slideInterval = setInterval(nextSlide, 2000);
+            updateButtons();
+        }
+    }
+
+    function stopSlideshow() {
+        isPlaying = false;
+        clearInterval(slideInterval);
+        updateButtons();
+    }
+
+    function updateButtons() {
+        document.querySelector('.btn-play').disabled = isPlaying;
+        document.querySelector('.btn-stop').disabled = !isPlaying;
+        document.querySelector('.btn-prev').disabled = !isPlaying;
+        document.querySelector('.btn-next').disabled = !isPlaying;
+    }
+
+    updateButtons();
+
+    document.addEventListener('keydown', function(e) {
+        if (!isPlaying) return;
+
+        if (e.key === 'ArrowRight') nextSlide();
+        if (e.key === 'ArrowLeft') prevSlide();
+        if (e.key === ' ') {
+            e.preventDefault();
+            stopSlideshow();
+        }
+    });
+</script>
+
+</body>
+</html>

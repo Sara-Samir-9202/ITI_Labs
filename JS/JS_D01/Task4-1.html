@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>Task4-1</title>
+</head>
+<body>
+
+<script>
+var userNumber = prompt("Enter the number:");
+var initialRadix = parseInt(prompt("Enter the initial radix (base):"));
+var targetRadix = parseInt(prompt("Enter the target radix (base):"));
+
+var decimalValue = parseInt(userNumber, initialRadix);
+
+if (isNaN(decimalValue)) {
+    alert("Invalid number for the given initial radix!");
+} else {
+    var result = decimalValue.toString(targetRadix);
+    alert("The number in base " + targetRadix + " is: " + result);
+}
+</script>
+
+</body>
+</html>

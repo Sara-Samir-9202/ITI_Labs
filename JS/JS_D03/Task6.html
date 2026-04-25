@@ -1,0 +1,138 @@
+<html>
+<head>
+    <title>Profile Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .gender {
+            margin: 10px 0;
+        }
+        .gender label {
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .gender img {
+            width: 50px;
+            margin-left: 5px;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+  
+    <label>Enter your name:</label>
+    <input type="text" id="name" placeholder="Your Name">
+    <div id="nameError" class="error">
+        Name must contain letters only and at most one space between first and last name.
+    </div>
+    <br><br>
+
+   
+    <label>Enter your age:</label>
+    <input type="text" id="age" placeholder="Your Age">
+    <div id="ageError" class="error">
+        Age must be a positive number greater than 0.
+    </div>
+    <br><br>
+
+    
+    <label>Select your Gender:</label><br>
+    <div class="gender">
+        
+            <input type="radio" name="gender" value="Male"> 
+            <img src="Images/male.png" alt="Male">
+      
+            <input type="radio" name="gender" value="Female"> 
+            <img src="Images/female.png" alt="Female">
+
+    </div>
+    <br>
+
+
+    <label>Select your favorite color:</label>
+    <select id="color">
+        <option>Red</option>
+        <option>Green</option>
+        <option>Blue</option>
+        <option>Orange</option>
+        <option>Purple</option>
+    </select>
+    <br><br>
+
+    
+    <button onclick="register()">Register</button>
+
+    <script>
+        const nameInput = document.getElementById("name");
+        const nameError = document.getElementById("nameError");
+        const ageInput = document.getElementById("age");
+        const ageError = document.getElementById("ageError");
+
+       
+        nameInput.addEventListener("input", function() {
+            const namePattern = /^[A-Za-z]+(?: [A-Za-z]+)?$/;
+            if (!namePattern.test(this.value.trim())) {
+                nameError.style.display = "block";
+            } else {
+                nameError.style.display = "none";
+            }
+        });
+
+      
+        ageInput.addEventListener("input", function() {
+            if (this.value.trim() === "" || isNaN(this.value) || Number(this.value) <= 0) {
+                ageError.style.display = "block";
+            } else {
+                ageError.style.display = "none";
+            }
+        });
+
+        function register() {
+            const name = nameInput.value.trim();
+            const age = ageInput.value.trim();
+            const color = document.getElementById("color").value;
+
+           
+            let genderRadios = document.getElementsByName("gender");
+            let gender ="";
+            let genderImgSrc = "";
+            for (let i = 0; i < genderRadios.length; i++) {
+                if (genderRadios[i].checked) {
+                    gender = genderRadios[i].value;
+                    genderImgSrc = gender === "Male" ? "Images/male.png" : "Images/female.png";
+                    break;
+                }
+            }
+
+           
+            const namePattern = /^[A-Za-z]+(?: [A-Za-z]+)?$/;
+            if (!namePattern.test(name)) {
+                alert("Please fix your name before registering.");
+                return;
+            }
+
+            if (age === "" || isNaN(age) || Number(age) <= 0) {
+                alert("Please enter a valid positive age before registering.");
+                return;
+            }
+
+            if (gender === "") {
+                alert("Please select your gender.");
+                return;
+            }
+
+            document.body.innerHTML = `
+                <h2 style="color:${color};">Welcome ${name}</h2>
+                <img src="${genderImgSrc}" alt="${gender}" style="width:100px;">
+                 `
+            ;
+        }
+    </script>
+</body>
+</html>

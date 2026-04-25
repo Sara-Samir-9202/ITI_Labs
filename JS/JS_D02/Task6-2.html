@@ -1,0 +1,91 @@
+<html>
+<head>
+    <title>Array Operations</title>
+</head>
+<body>
+
+<script>
+function runArrayProgram() {
+    var size;
+    do {
+        size = parseInt(prompt("Enter the size of the array:"));
+    } while (isNaN(size) || size <= 0);
+
+    var numbers = [];
+    for (var i = 0; i < size; i++) {
+        var num;
+        do {
+            num = prompt("Enter number " + (i+1) + ":");
+        } while (isNaN(num));
+        numbers.push(Number(num));
+    }
+
+    var repeat = true;
+    while (repeat) {
+ 
+        var choice = prompt(
+            `Choose an option (a-h):
+              a: Display array in original order
+              b: Display array in ascending order
+              c: Display array in descending order
+              d: Display reversed version of array
+              e: Display even numbers only
+              f: Display numbers divisible by a given number
+              g: Display array with 30% discount
+              h: Display numbers concatenated with ***`
+        ).toLowerCase();
+
+        switch(choice) {
+            case 'a':
+                alert("Original array: " + numbers.join(", "));
+                break;
+            case 'b':
+                alert("Ascending: " + numbers.slice().sort((x,y)=>x-y).join(", "));
+                break;
+            case 'c':
+                alert("Descending: " + numbers.slice().sort((x,y)=>y-x).join(", "));
+                break;
+            case 'd':
+                alert("Reversed: " + numbers.slice().reverse().join(", "));
+                break;
+            case 'e':
+                var evens = numbers.filter(n => n % 2 === 0);
+                if(evens.length > 0){
+                    alert("Even numbers: " + evens.join(", "));
+                } else {
+                    alert("No even numbers in the array.");
+                }
+                break;
+            case 'f':
+                var div = parseFloat(prompt("Enter a number to check divisibility:"));
+                var divisible = numbers.filter(n => n % div === 0);
+                if(divisible.length > 0){
+                    alert("Numbers divisible by " + div + ": " + divisible.join(", "));
+                } else {
+                    alert("No numbers divisible by " + div + ".");
+                }
+                break;
+            case 'g':
+                var discount = numbers.map(n => (n * 0.7).toFixed(2));
+                alert("Array with 30% discount: " + discount.join(", "));
+                break;
+            case 'h':
+                alert("Concatenated string: " + numbers.join("***"));
+                break;
+            default:
+                alert("Invalid choice. Please select a letter from a to h.");
+        }
+
+        var again = prompt("Do you want to repeat? (y/n)").toLowerCase();
+        if(again !== 'yes' && again !== 'y') {
+            repeat = false;
+            alert("Program ended. Goodbye!");
+        }
+    }
+}
+
+runArrayProgram();
+</script>
+
+</body>
+</html>

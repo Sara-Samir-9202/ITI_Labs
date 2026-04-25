@@ -1,0 +1,35 @@
+<html>
+<head>
+    <title>Task3</title>
+</head>
+
+<body>
+
+<h1>Adding, Multiplying and Dividing 3 Values</h1>
+<hr>
+
+<script>
+    var num1 = Number(prompt("Enter first number"));
+    var num2 = Number(prompt("Enter second number"));
+    var num3 = Number(prompt("Enter third number"));
+
+    if (isNaN(num1) || isNaN(num2) || isNaN(num3)) {
+        alert("Please enter numbers only");
+    } else {
+        var sum = num1 + num2 + num3;
+        var multiply = num1 * num2 * num3;
+        var divide = num1 / num2 / num3;
+
+        document.write("<font color='red'>Sum of the 3 values:</font> "
+            + num1 + " + " + num2 + " + " + num3 + " = " + sum + "<br><br>");
+
+        document.write("<font color='red'>Multiplication of the 3 values:</font> "
+            + num1 + " * " + num2 + " * " + num3 + " = " + multiply + "<br><br>");
+
+        document.write("<font color='red'>Division of the 3 values:</font> "
+            + num1 + " / " + num2 + " / " + num3 + " = " + divide);
+    }
+</script>
+
+</body>
+</html>

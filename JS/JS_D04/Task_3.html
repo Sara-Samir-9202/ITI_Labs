@@ -1,0 +1,135 @@
+<html>
+<head>
+<title>Task_3</title>
+<style>
+    body {
+        font-family: Arial;
+        padding: 20px;
+    }
+
+    #text {
+        padding: 20px;
+        margin-bottom: 20px;
+        display: inline-block;
+        width: 100%;
+        box-sizing: border-box;
+        border: 3px solid black; 
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+    }
+
+    th, td {
+        border: 1px solid #000;
+        padding: 10px;
+        vertical-align: top;
+    }
+</style>
+</head>
+<body>
+
+<h1 align="center">Change Text Style</h1>
+
+<p id="text" align="center">
+Here is a paragraph of text that has various alignment characteristics that can be changed!
+</p>
+
+<table>
+    <tr>
+        <th>Font Family</th>
+        <th>Font Size</th>
+        <th>Font Style</th>
+        <th>Text Transform</th>
+        <th>Text Decoration</th>
+        <th>Border Style</th>
+        <th>Border Color</th>
+        <th>Text Color</th>
+    </tr>
+    <tr>
+        <td>
+            <input type="radio" name="font" value="Arial" checked> Arial<br>
+            <input type="radio" name="font" value="Courier New"> Courier<br>
+            <input type="radio" name="font" value="Impact"> Impact<br>
+            <input type="radio" name="font" value="Times New Roman"> Times<br>
+            <input type="radio" name="font" value="Verdana"> Verdana
+        </td>
+        <td>
+            <input type="radio" name="size" value="12px"> 12px<br>
+            <input type="radio" name="size" value="14px"> 14px<br>
+            <input type="radio" name="size" value="18px" checked> 18px<br>
+            <input type="radio" name="size" value="22px"> 22px<br>
+            <input type="radio" name="size" value="25px"> 25px
+        </td>
+        <td>
+            <input type="radio" name="style" value="normal" checked> Normal<br>
+            <input type="radio" name="style" value="italic"> Italic<br>
+            <input type="radio" name="style" value="oblique"> Oblique<br>
+            <input type="radio" name="style" value="bold"> Bold<br>
+            <input type="radio" name="style" value="lighter"> Lighter
+        </td>
+        <td>
+            <input type="radio" name="transform" value="none" checked> none<br>
+            <input type="radio" name="transform" value="uppercase"> Uppercase<br>
+            <input type="radio" name="transform" value="lowercase"> Lowercase<br>
+            <input type="radio" name="transform" value="capitalize"> Capitalize<br>
+            <input type="radio" name="transform" value="full-width"> Full-width
+        </td>
+        <td>
+            <input type="radio" name="decoration" value="none" checked> none<br>
+            <input type="radio" name="decoration" value="underline"> underline<br>
+            <input type="radio" name="decoration" value="line-through"> line-through<br>
+            <input type="radio" name="decoration" value="overline"> overline<br>
+            <input type="radio" name="decoration" value="blink"> blink
+        </td>
+        <td>
+            <input type="radio" name="borderStyle" value="solid" checked> Solid<br>
+            <input type="radio" name="borderStyle" value="dotted"> Dotted<br>
+            <input type="radio" name="borderStyle" value="dashed"> Dashed<br>
+            <input type="radio" name="borderStyle" value="double"> Double<br>
+            <input type="radio" name="borderStyle" value="groove"> Groove
+        </td>
+        <td>
+            <input type="radio" name="borderColor" value="black" checked> Black<br>
+            <input type="radio" name="borderColor" value="red"> Red<br>
+            <input type="radio" name="borderColor" value="yellow"> Yellow<br>
+            <input type="radio" name="borderColor" value="blue"> Blue<br>
+            <input type="radio" name="borderColor" value="orange"> Orange
+        </td>
+        <td>
+           <input type="radio" name="textColor" value="black" checked> Black<br>
+           <input type="radio" name="textColor" value="red"> Red<br>
+           <input type="radio" name="textColor" value="green"> Green<br>
+           <input type="radio" name="textColor" value="blue"> Blue<br>
+           <input type="radio" name="textColor" value="orange"> Orange
+        </td>
+
+    </tr>
+</table>
+
+<script>
+    const text = document.getElementById("text");
+    const radios = document.querySelectorAll("input[type=radio]");
+
+    radios.forEach(radio => {
+        radio.addEventListener("change", applyStyle);
+    });
+
+function applyStyle()
+  {text.style.cssText=`
+    font-family:${document.querySelector("input[name=font]:checked").value};
+    font-size:${document.querySelector("input[name=size]:checked").value};
+    font-style:${document.querySelector("input[name=style]:checked").value};
+    text-transform:${document.querySelector("input[name=transform]:checked").value};
+    text-decoration:${document.querySelector("input[name=decoration]:checked").value};
+    border-style:${document.querySelector("input[name=borderStyle]:checked").value};
+    border-color:${document.querySelector("input[name=borderColor]:checked").value};
+    color:${document.querySelector("input[name=textColor]:checked").value};
+    `}
+
+</script>
+
+</body>
+</html>

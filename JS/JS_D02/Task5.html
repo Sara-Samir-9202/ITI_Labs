@@ -1,0 +1,56 @@
+<html>
+<head>
+    <title>Student Grades</title>
+</head>
+<body>
+
+<script>
+ 
+    var numStudents = parseInt(prompt("Enter number of students:"));
+    var numCourses = parseInt(prompt("Enter number of courses per student:"));
+
+  
+    var grades = [];
+
+    for (var i = 0; i < numStudents; i++) {
+        grades[i] = [];
+        for (var j = 0; j < numCourses; j++) {
+            var grade;
+            do {
+                grade = prompt("Enter grade for Student " + (i+1) + ", Course " + (j+1) + ":");
+                grade = parseFloat(grade);
+            } while (isNaN(grade) || grade < 0); 
+            grades[i][j] = grade;
+        }
+    }
+
+ 
+    document.write("<table border='3' cellpadding='10' align='center' bordercolor='blue'>");
+
+
+    document.write("<tr>");
+    document.write("<th><font color='blue'>StudentNum</font></th>"); 
+    for (var j = 0; j < numCourses; j++) {
+        document.write("<th><font color='blue'>Course " + (j+1) + "</font></th>");
+    }
+    document.write("<th><font color='blue'>SumOfGrades</font></th>");
+    document.write("</tr>");
+
+
+    for (var i = 0; i < numStudents; i++) {
+        var sum = 0;
+        document.write("<tr>");
+        document.write("<td><b>ST" + (i+1) + "</b></td>"); 
+        for (var j = 0; j < numCourses; j++) {
+            document.write("<td>" + grades[i][j] + "</td>");
+            sum += grades[i][j];
+        }
+        document.write("<td><b>" + sum + "</b></td>");
+        document.write("</tr>");
+    }
+
+    document.write("</table>");
+</script>
+
+</body>
+</html>

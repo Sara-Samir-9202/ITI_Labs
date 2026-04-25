@@ -1,0 +1,150 @@
+<html>
+<head>
+    <title>Task_1</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #ddd;
+            padding: 20px;
+        }
+
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+        }
+
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background: #aaa;
+        }
+
+        .error {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h3>News Type</h3>
+    <input type="radio" name="type" value="Sport"> Sport
+    <input type="radio" name="type" value="Social"> Social
+    <input type="radio" name="type" value="Politic"> Politic
+    <div id="typeError" class="error"></div>
+
+    <br><br>
+
+    <input type="text" id="title" placeholder="News Title">
+    <button onclick="addNews()">Add</button>
+    <div id="titleError" class="error"></div>
+
+    <br><br>
+
+    <label>Search:</label>
+    <input type="text" id="search" onkeyup="searchNews()">
+
+    <table>
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Title</th>
+            </tr>
+        </thead>
+        <tbody id="newsTable"></tbody>
+    </table>
+
+    <script>
+        let newsList = [];
+
+        function addNews() {
+
+            document.getElementById("typeError").innerText = "";
+            document.getElementById("titleError").innerText = "";
+
+            let title = document.getElementById("title").value.trim();
+            let types = document.getElementsByName("type");
+            let selectedType = "";
+
+            for (let i = 0; i < types.length; i++) {
+                if (types[i].checked) {
+                    selectedType = types[i].value;
+                    break;
+                }
+            }
+
+            if (title === "") {
+                document.getElementById("titleError").innerText =
+                    "Title is required";
+                return;
+            }
+
+            if (/^\d/.test(title)) {
+                document.getElementById("titleError").innerText =
+                    "Title cannot start with a number";
+                return;
+            }
+
+            if (selectedType === "") {
+                document.getElementById("typeError").innerText =
+                    "Please select news type";
+                return;
+            }
+
+      
+            let exists = newsList.some(
+                n => n.title.toLowerCase() === title.toLowerCase()
+                && n.type === selectedType
+            );
+
+            if (exists) {
+                document.getElementById("titleError").innerText =
+                    "This news already exists in the same type";
+                return;
+            }
+
+            newsList.push({
+                title: title,
+                type: selectedType
+            });
+
+            document.getElementById("title").value = "";
+            displayNews(newsList);
+        }
+
+        function displayNews(list) {
+            let table = document.getElementById("newsTable");
+            table.innerHTML = "";
+
+            list.forEach(n => {
+                let row = `
+                    <tr>
+                        <td>${n.type}</td>
+                        <td>${n.title}</td>
+                    </tr>
+                `;
+                table.innerHTML += row;
+            });
+        }
+
+        function searchNews() {
+            let value = document.getElementById("search").value.toLowerCase();
+
+            let filtered = newsList.filter(n =>
+                n.title.toLowerCase().includes(value) ||
+                n.type.toLowerCase().includes(value)
+            );
+
+            displayNews(filtered);
+        }
+    </script>
+
+</body>
+</html>  

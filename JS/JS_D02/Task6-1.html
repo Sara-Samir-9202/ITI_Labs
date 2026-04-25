@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>Pascal Case Converter</title>
+</head>
+<body>
+
+<script>
+    var userInput;
+
+    // نمط للتحقق من الحروف فقط (مسافات مسموحة بين الكلمات)
+    var lettersPattern = /^[A-Za-z ]+$/;
+
+    do {
+        userInput = prompt("Enter a string with letters only to convert to Pascal Case:");
+    } while(!lettersPattern.test(userInput) || userInput.trim() === "");
+
+    function toPascalCase(str) {
+        return str
+            .split(" ")
+            .map(word => {
+                return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+            })
+            .join(" "); 
+    }
+
+    var pascalCaseOutput = toPascalCase(userInput);
+
+    document.write("<h2>Pascal Case: <span style='color:blue'>" + pascalCaseOutput + "</span></h2>");
+</script>
+
+</body>
+</html>

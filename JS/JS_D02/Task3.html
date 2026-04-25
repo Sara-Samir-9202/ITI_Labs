@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>Task_3</title>
+</head>
+<body>
+<h3 id="day"></h3>
+<h3 id="date"></h3>
+
+<script>
+    var today = new Date();
+
+    var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+    var dayName = days[today.getDay()];
+    var date = today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
+
+    document.getElementById("day").innerHTML = "<font color='red'>Today is:</font> " + dayName;
+    document.getElementById("date").innerHTML = "<font color='red'>Date is: </font> " + date;
+
+</script>
+
+</body>
+</html>
