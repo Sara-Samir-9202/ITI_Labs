@@ -1,0 +1,72 @@
+body {
+    margin: 0;
+    font-family: "Times New Roman", serif;
+    background: repeating-linear-gradient(
+        90deg,
+        #f2f2f2,
+        #f2f2f2 12px,
+        #fafafa 12px,
+        #fafafa 24px
+    );
+}
+
+h1 {
+    color: #8fae2b;               
+    text-shadow: 2px 2px #ccc;
+    font-size: 36px;
+    text-align: center; 
+}
+
+.intro {
+    color: #8fae2b;             
+    font-size: 14px;
+    text-align: center;
+}
+
+.intro a {
+    color: #8b5a2b;
+    font-style: italic;   
+    text-decoration: none; 
+}
+
+.dotted {
+    border: none;
+    border-top: 3px dotted #8b5a2b;  
+    margin: 25px 0;
+}
+
+.bird h3 {
+    color: #8b5a2b;              
+    font-size: 14px;
+    text-align: center;
+}
+
+.bird p {
+    color: #8fae2b;
+    font-size: 13px;
+    text-align: center;
+}
+
+.birds {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.bird {
+    flex: 1 1 300px;
+    text-align: center;
+}
+
+h2 {
+    color: #8fae2b;
+    font-style: italic;
+    text-align: center;
+}
+
+.end {
+    color: #8b5a2b;
+    font-weight: bold;
+    text-align: center;
+}
